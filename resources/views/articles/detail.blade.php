@@ -8,7 +8,7 @@
                     {{ $article->created_at->diffForHumans() }}
                 </div>
                 <p class="card-text">{{ $article->body }}</p>           
-                <a href="{{ url("/articles/detail/{id}") }}" class="btn btn-danger">Delete</a>
+                <a href="{{ url("/articles/delete/$article->id") }}" class="btn btn-danger">Delete</a>
                 
             </div>
         </div>

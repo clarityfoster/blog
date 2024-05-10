@@ -18,6 +18,10 @@ class ArticleController extends Controller
         return view('articles.detail', [
             'article' => $data,
         ]);
-
+    }
+    public function delete($id) {
+        $article = Article::find($id);
+        $article->delete();
+        return redirect('/articles')->with('danger', 'Article deleted');
     }
 }
