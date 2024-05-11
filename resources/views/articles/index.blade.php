@@ -6,6 +6,12 @@
                 {{ session('danger') }}
             </div>
         @endif
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+        {{ $articles->links('pagination::bootstrap-4') }}
         @foreach ($articles as $article)
             <div class="card mb-2">
                 <div class="card-body">

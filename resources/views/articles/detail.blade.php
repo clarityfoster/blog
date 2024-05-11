@@ -1,6 +1,11 @@
 @extends('layouts/app')
 @section('content')
     <div class="cotainer m-auto" style="max-width: 700px">
+        @if (session('info')) 
+            <div class="alert alert-info">
+                {{ session('info') }}
+            </div>
+        @endif
         <div class="card mb-2">
             <div class="card-body">
                 <h5 class="card-title">{{ $article->title }}</h5>
@@ -9,7 +14,7 @@
                 </div>
                 <p class="card-text">{{ $article->body }}</p>           
                 <a href="{{ url("/articles/delete/$article->id") }}" class="btn btn-danger">Delete</a>
-                
+                <a href="{{ url("/articles/edit/$article->id") }}" class="btn btn-info text-white">Edit</a>
             </div>
         </div>
     </div>
