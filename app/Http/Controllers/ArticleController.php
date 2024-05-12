@@ -60,8 +60,8 @@ class ArticleController extends Controller
         $article = Article::find($id);
 
         if(
-            $article->title == request()->title ||
-            $article->body == request()->body ||
+            $article->title == request()->title &&
+            $article->body == request()->body &&
             $article->category_id == request()->title 
         ) {
             return back()->with('warning', "Nothing to update");
