@@ -1,6 +1,6 @@
 @extends('layouts/app')
 @section('content')
-    <div class="container" style="max-width: 800px">
+    <div class="container mt-4" style="max-width: 800px">
         @if ($errors->any())
             <div class="alert alert-warning">
                 <ol>
@@ -10,8 +10,13 @@
                 </ol>
             </div>
         @endif
-        <div class="bg-info p-3 mb-3 rounded">
-            <h4 class="h5 text-center text-white font-weight-bold">Edit Page</h4>
+        @if (session('warning'))
+            <div class="alert alert-warning">
+                {{ session('warning') }}
+            </div>
+        @endif
+        <div class="mb-3">
+            <h4 class="h3 text-info">Edit Page</h4>
         </div>
         <form method="post">
             @csrf
@@ -36,6 +41,9 @@
                      @endforeach
                 </select>
             </div>
+            <a href="{{ url("/articles/detail/$article->id") }}" class="btn btn-secondary ml-3">
+                <i class="bi bi-arrow-left"></i>
+            </a>
             <input type="submit" value="Update Article" class="btn btn-info text-white">
         </form>
     </div>

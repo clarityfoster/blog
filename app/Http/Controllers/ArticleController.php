@@ -57,20 +57,27 @@ class ArticleController extends Controller
         ]);
     }
     public function update($id) {
-        $validator = validator(request()->all(), [
-            'title' => 'required',
-            'body' => 'required',
-            'category_id' => 'required',
-        ]);
-        if($validator->fails()) {
-            return back()->withErrors($validator);
-        }
         $article = Article::find($id);
+
+        if(
+            $article->title == request()->title ||
+            $article->body == request()->body ||
+            $article->category_id == request()->title 
+        ) {
+            return back()->with('warning', "Nothing to update");
+        }
+
         $article->title = request()->title;
         $article->body = request()->body;
         $article->category_id = request()->category_id;
         $article->update();
 
         return redirect("/articles/detail/$id")->with('info', 'Article updated');
+    }
+    public function backBtnToIndex() {
+        return view("articles.index");
+    }
+    public function backBtnToDetail() {
+        return view("articles.detail");
     }
 }

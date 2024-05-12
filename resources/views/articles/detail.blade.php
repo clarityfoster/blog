@@ -6,6 +6,9 @@
                 {{ session('info') }}
             </div>
         @endif
+        <a href="{{ url("/articles") }}" class="btn btn-secondary mb-2">
+            <i class="bi bi-arrow-left"></i>
+        </a>
         <div class="card mb-2">
             <div class="card-body">
                 <h5 class="card-title">{{ $article->title }}</h5>
