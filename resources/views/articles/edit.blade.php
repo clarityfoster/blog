@@ -21,16 +21,16 @@
         <form method="post">
             @csrf
             <div class="mb-3">
-                <label for="title" class="text-info">Title</label>
-                <input type="text" class="form-control border border-info" name="title" value="{{ $article->title }}">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" value="{{ $article->title }}">
             </div>
             <div class="mb-3">
-                <label for="body" class="text-info">Body</label>
-                <textarea type="text" class="form-control border border-info" name="body">{{ $article->body }}</textarea>
+                <label for="body">Body</label>
+                <textarea type="text" class="form-control" name="body">{{ $article->body }}</textarea>
             </div>
             <div class="mb-3">
-                <label for="category" class="text-info">Category</label>
-                <select name="category_id" class="form-select text-info border border-info">
+                <label for="category">Category</label>
+                <select name="category_id" class="form-select">
                     @foreach ($categories as $category)
                     @php
                         $selected = $category->id == $article->category_id ? "selected" : "";  

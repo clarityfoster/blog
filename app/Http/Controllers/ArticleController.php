@@ -3,14 +3,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article; 
-use App\Models\Category; 
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
     public function index() {
+        $category = Category::all();
         $data = Article::latest()->paginate(10);
         return view('articles.index', [
             'articles' => $data,
+            'categories' => $category,
         ]);
     }
     public function detail($id) {
@@ -62,9 +64,9 @@ class ArticleController extends Controller
         if(
             $article->title == request()->title &&
             $article->body == request()->body &&
-            $article->category_id == request()->title 
+            $article->category_id == request()->category_id 
         ) {
-            return back()->with('warning', "Nothing to update");
+            return back()->with("warning", "Nothing to update");
         }
 
         $article->title = request()->title;
