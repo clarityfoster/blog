@@ -7,9 +7,12 @@ use App\Models\Category;
 
 class ArticleController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth')->except(['index', 'detail']);
+    }
     public function index() {
         $category = Category::all();
-        $data = Article::latest()->paginate(10);
+        $data = Article::latest()->paginate(5);
         return view('articles.index', [
             'articles' => $data,
             'categories' => $category,
@@ -47,6 +50,7 @@ class ArticleController extends Controller
         $article->title = request()->title;
         $article->body = request()->body;
         $article->category_id = request()->category_id;
+        $article->user_id = auth()->user()->id;
         $article->save();
         return redirect('/articles')->with('success', 'Article created');
     }

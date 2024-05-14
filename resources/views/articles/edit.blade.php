@@ -42,7 +42,7 @@
                 </select>
             </div>
             <a href="{{ url("/articles/detail/$article->id") }}" class="btn btn-secondary ml-3">
-                <i class="bi bi-arrow-left"></i>
+                <i class="bi bi-arrow-left"></i> Back
             </a>
             <input type="submit" value="Update Article" class="btn btn-info text-white">
         </form>

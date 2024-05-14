@@ -8,12 +8,13 @@ Route::get('/', [ArticleController::class, 'index']);
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/articles/detail/{id}', [ArticleController::class, 'detail']);
 Route::get("/articles/delete/{id}", [ArticleController::class, 'delete']);
-Route::get("/articles/add", [ArticleController::class, 'add']);
+Route::get("/articles/add", [ArticleController::class, 'add'])->middleware('auth');
 Route::post("/articles/add", [ArticleController::class, 'create']);
 Route::get("/articles/edit/{id}", [ArticleController::class, 'edit']);
 Route::post("/articles/edit/{id}", [ArticleController::class, 'update']);
 Route::get("/comments/delete/{id}", [CommentController::class, 'delete']);
 Route::post("/comments/add", [CommentController::class, 'add']);
+Route::get("/comments/view/{id}", [CommentController::class, 'view']);
 
 Auth::routes();
 
