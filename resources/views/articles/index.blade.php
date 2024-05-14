@@ -16,7 +16,7 @@
             <div class="card p-1 mb-2">
                 <div class="card-body">
                     @php
-                        $colors = ['#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#9B59B6', '#E67E22'];
+                        $colors = ['#FF5733', '#2E9944', '#3357FF', '#F1C40F', '#9B59B6', '#E67E22'];
                         $colorIndex = $article->user->id % count($colors);
                         $color = $colors[$colorIndex];
                     @endphp
@@ -29,7 +29,7 @@
                                 </b>
                             </a>
                             <div class="d-flex flex-column">
-                                <a href="$" class="text-decoration-none">
+                                <a href="#" class="text-decoration-none">
                                     <b class="h5 text-muted mt-2">{{ $article->user->name }}</b>
                                 </a>
                                 <span class="text-success small">{{ $article->created_at->diffForHumans() }}</span>

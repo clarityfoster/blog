@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\Article; 
 use App\Models\Category;
@@ -26,8 +27,12 @@ class ArticleController extends Controller
     }
     public function delete($id) {
         $article = Article::find($id);
-        $article->delete();
-        return redirect('/articles')->with('danger', 'Article deleted');
+        if(Gate::allows('article-delete', $article )) {
+            $article->delete();
+            return redirect('/articles')->with('danger', 'Article deleted');
+        } else {
+            return back()->with();
+        }
     }
     public function add() {
         $categories = Category::all();
@@ -57,10 +62,14 @@ class ArticleController extends Controller
     public function edit($id) {
         $articles = Article::find($id);
         $category = Category::all();
-        return view('articles.edit', [
-            'article' => $articles,
-            'categories' => $category,
-        ]);
+        if(Gate::allows('article-edit', $articles)) {
+            return view('articles.edit', [
+                'article' => $articles,
+                'categories' => $category,
+            ]);
+        } else {
+            return back()->with();
+        }
     }
     public function update($id) {
         $article = Article::find($id);

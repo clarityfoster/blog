@@ -18,7 +18,7 @@ class CommentController extends Controller
             $comment->delete();
             return back()->with('cm-delete', "Comment deleted");
         } else {
-            return back()->with('unanthorized', "Unauthorized");
+            return back()->with();
         }
     }
     public function add() {
