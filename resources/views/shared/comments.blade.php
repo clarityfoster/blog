@@ -1,4 +1,3 @@
-
 <ul class="list-group mb-2">
     <li class="list-group-item active">
         <b>
@@ -14,7 +13,7 @@
         <li class="list-group-item"> 
             @php
                 $colors = [
-                    '#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#9B59B6', '#E67E22', '#1ABC9C', '#E74C3C', '#3498DB', '#2ECC71', '#F39C12', '#D35400', '#8E44AD', '#E74C3C',  '#9B59B6' 
+                    '#FF5733', '#2E9944', '#3357FF', '#F1C40F', '#9B59B6', '#E67E22', '#1ABC9C', '#E74C3C', '#3498DB', '#2ECC71', '#F39C12', '#D35400', '#8E44AD', '#E74C3C',  '#9B59B6',
                 ];
                 $colorIndex = $comment->user->id % count($colors);
                 $color = $colors[$colorIndex];
@@ -31,7 +30,11 @@
                         <a href="#" class="text-decoration-none mb-2">
                             <b class="h6 text-muted">{{ $comment->user->name }}</b>
                         </a>
-                        <span class="">{{ $comment->content }}</span>
+                        <span>{{ $comment->content }}</span>
+                        <small class="small text-success mt-1">
+                            <i class="bi bi-clock"></i>
+                            {{ $comment->created_at->diffForHumans() }}
+                        </small>
                     </div>
                 </div>
                 @auth 

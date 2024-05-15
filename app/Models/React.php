@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class React extends Model
 {
     use HasFactory;
-    public function likedUsers() {
-        return $this->belongsTo("App\Models\React");
+    public function likedUser() {
+        return $this->hasMany("App\Models\React");
     }
 }

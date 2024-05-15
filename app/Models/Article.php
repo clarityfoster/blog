@@ -19,6 +19,6 @@ class Article extends Model
         return $this->belongsTo('App\Models\User');
     }
     public function likes() {
-        return $this->hasMany('\App\Models\User');
+        return $this->hasMany('\App\Models\React');
     }
 }

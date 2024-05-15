@@ -9,35 +9,8 @@
         @endphp
         @include('shared.cardHeader')
         <h5 class="card-title mt-2">{{ $article->title }}</h5>
-        <p class="card-text">{{ $article->body }}</p>   
-        @auth
-             <div class="d-flex justify-content-between mb-2">
-                 <div>
-                     {{-- Heart Icon --}}
-                     <a href="#" class="text-dark">
-                         <i class="bi bi-heart fs-5"></i>
-                     </a>
-                     {{-- Number of reacts --}}
-                     <a href="" class="text-decoration-none text-dark">
-                         
-                     </a>
-                 </div> 
-                 <div>
-                     <i class="bi bi-hand-thumbs-down fs-5"></i>
-                     <a href="" class="text-decoration-none text-dark">
-                         
-                     </a>
-                 </div> 
-                 <div>
-                     @if (count($article->comments) <= 0)
-                        <i class="bi bi-chat-dots fs-5"></i>
-                     @else
-                        <i class="bi bi-chat-dots fs-5"></i>
-                        {{ count($article->comments) }}
-                     @endif
-                 </div> 
-             </div>
-        @endauth 
+        <p class="card-text">{{ $article->body }}</p>
+        @include('shared.reactBtn')
         @auth
            @can('article-delete', $article)
                 <a href="{{ url("/articles/delete/$article->id") }}" class="btn btn-danger">Delete</a>

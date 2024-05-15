@@ -31,5 +31,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('article-edit', function($user, $article) {
             return $user->id == $article->user_id;
         });
+        Gate::define('like', function($user, $like) {
+            return $user->id == $like->user_id;
+        });
+        // insert into `reacts` (`user_id`, `article_id`, `updated_at`, `created_at`) values (1, 24, 2024-05-15 12:04:24, 2024-05-15 12:04:24)
     }
 }
