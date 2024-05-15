@@ -29,7 +29,7 @@ class ArticleController extends Controller
         $article = Article::find($id);
         if(Gate::allows('article-delete', $article )) {
             $article->delete();
-            return redirect('/articles')->with('danger', 'Article deleted');
+            return redirect('/articles')->with('article-delete', 'Article deleted');
         } else {
             return back()->with();
         }
@@ -57,7 +57,7 @@ class ArticleController extends Controller
         $article->category_id = request()->category_id;
         $article->user_id = auth()->user()->id;
         $article->save();
-        return redirect('/articles')->with('success', 'Article created');
+        return redirect('/articles')->with('article-create', 'Article created');
     }
     public function edit($id) {
         $articles = Article::find($id);
@@ -79,7 +79,7 @@ class ArticleController extends Controller
             $article->body == request()->body &&
             $article->category_id == request()->category_id 
         ) {
-            return back()->with("warning", "Nothing to update");
+            return back()->with("no-update", "Nothing to update");
         }
 
         $article->title = request()->title;
@@ -87,7 +87,7 @@ class ArticleController extends Controller
         $article->category_id = request()->category_id;
         $article->update();
 
-        return redirect("/articles/detail/$id")->with('info', 'Article updated');
+        return redirect("/articles/detail/$id")->with('article-update', 'Article updated');
     }
     public function backBtnToIndex() {
         return view("articles.index");

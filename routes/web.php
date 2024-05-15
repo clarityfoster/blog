@@ -15,6 +15,8 @@ Route::post("/articles/edit/{id}", [ArticleController::class, 'update']);
 Route::get("/comments/delete/{id}", [CommentController::class, 'delete']);
 Route::post("/comments/add", [CommentController::class, 'add']);
 Route::get("/comments/view/{id}", [CommentController::class, 'view']);
+Route::get("/reacts/like/{id}", [CommentController::class, 'like'])->name('article.like');
+Route::get("/reacts/unlike/{id}", [CommentController::class, 'unlike']);
 
 Auth::routes();
 
