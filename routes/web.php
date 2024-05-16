@@ -20,9 +20,6 @@ Route::get("/comments/view/{id}", [CommentController::class, 'view']);
 Route::post("/reacts/like", [ReactController::class, 'like']);
 Route::post("/reacts/unlike/{id}", [ReactController::class, 'unlike']);
 Route::get("/reacts/view/{id}", [ReactController::class, 'likeList']);
-Route::post("/reacts/dislike", [DislikeController::class, 'dislike']);
-Route::post("/reacts/undislike/{id}", [DislikeController::class, 'undislike']);
-Route::get("/reacts/view-dislike/{id}", [DislikeController::class, 'dislikeList']);
 
 Auth::routes();
 
