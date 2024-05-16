@@ -5,6 +5,7 @@
     @php
         $dislike = $article->dislikes->where('user_id', auth()->user()->id)->first();
     @endphp
+
     <div class="d-flex justify-content-between mb-2">
         <div>
             @if ($like)  

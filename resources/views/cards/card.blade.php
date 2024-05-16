@@ -8,8 +8,7 @@
             $color = $colors[$colorIndex];
         @endphp
         @include('cards.cardHeader')
-        <h5 class="card-title mt-2">{{ $article->title }}</h5>
-        <p class="card-text">{{ $article->body }}</p>
+        @include('cards.content')
         @include('shared.reactBtn')
         @auth
            @can('article-delete', $article)
