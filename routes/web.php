@@ -18,6 +18,7 @@ Route::post("/comments/add", [CommentController::class, 'add']);
 Route::get("/comments/view/{id}", [CommentController::class, 'view']);
 Route::post("/reacts/like", [ReactController::class, 'like']);
 Route::post("/reacts/unlike/{id}", [ReactController::class, 'unlike']);
+Route::get("/reacts/view/{id}", [ReactController::class, 'likeList']);
 
 Auth::routes();
 

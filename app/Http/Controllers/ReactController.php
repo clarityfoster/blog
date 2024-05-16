@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Article;
 use App\Models\React;
 
 class ReactController extends Controller
@@ -32,5 +33,11 @@ class ReactController extends Controller
         }
         $like->delete();
         return back();
+    }
+    public function likeList($id) {
+        $articles = Article::find($id);
+        return view("reacts.like", [
+            'article' => $articles
+        ]);
     }
 }

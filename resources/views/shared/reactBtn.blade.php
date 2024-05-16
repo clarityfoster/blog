@@ -11,7 +11,7 @@
                     <button type="submit" class="btn btn-link p-0">
                         <i class="bi bi-heart-fill fs-4 text-danger"></i>
                     </button>
-                    <a href="#" class="text-decoration-none text-dark">
+                    <a href="{{ url("/reacts/view/$article->id") }}" class="text-decoration-none text-dark">
                         <b>{{ count($article->likes) }}</b>
                     </a>
                 </form>
@@ -22,7 +22,7 @@
                     <button type="submit" class="btn btn-link p-0">
                         <i class="bi bi-heart fs-4 text-danger"></i>
                     </button>
-                    <a href="#" class="text-decoration-none text-dark">
+                    <a href="{{ url("/reacts/view/$article->id") }}" class="text-decoration-none text-dark">
                         <b>{{ count($article->likes) }}</b>
                     </a>
                 </form>
