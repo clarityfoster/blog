@@ -1,4 +1,5 @@
 <div class="container" style="max-width: 600px">
+    @include('shared.seeArticle')
     <ul class="list-group">
         <li class="list-group-item active">
             <b class="fs-5">
