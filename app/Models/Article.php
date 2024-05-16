@@ -21,7 +21,4 @@ class Article extends Model
     public function likes() {
         return $this->hasMany('App\Models\React');
     }
-    public function dislikes() {
-        return $this->hasMany('App\Models\Dislike');
-    }
 }
