@@ -9,7 +9,7 @@
             $colorIndex = $article->user->id % count($colors);
             $color = $colors[$colorIndex];
         @endphp
-        @include('shared.cardHeader')
+        @include('cards.cardHeader')
         <h5 class="card-title mt-2">{{ $article->title }}</h5>
         <p class="card-text">{{ $article->body }}</p> 
         @include('shared.reactBtn')
