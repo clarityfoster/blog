@@ -2,16 +2,16 @@
     <ul class="list-group">
         <li class="list-group-item active">
             <b class="fs-5">
-                @if ( count($article->likes) <= 1 )
-                    Like
+                @if ( count($article->dislikes) <= 1 )
+                    Dislike
                 @else
-                    Likes
+                    Dislikes
                 @endif
-                ({{ count($article->likes) }})
+                ({{ count($article->dislikes) }})
             </b>
-            @foreach ($article->likes as $like) 
+            @foreach ($article->dislikes as $dislike) 
                 <li class="list-group-item">
-                    @include('shared.reactProfile')
+                    @include('shared.dislikeProfile')
                 </li>
             @endforeach
         </li>
