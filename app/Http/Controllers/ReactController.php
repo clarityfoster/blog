@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Article;
 use App\Models\React;
 use App\Models\Dislike;
+use App\Models\Profile;
 
 class ReactController extends Controller
 {
@@ -29,7 +30,6 @@ class ReactController extends Controller
     public function unlike($id) {
         $userId = auth()->user()->id;
         $like = React::where('id', $id)->where('user_id', $userId)->first();
-        $dislike = Dislike::where('id', $id)->where('user_id', $userId)->first();
         if (!$like) {
             return back();
         }

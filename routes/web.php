@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReactController;
 use App\Http\Controllers\DislikeController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [ArticleController::class, 'index']);
 Route::get('/articles', [ArticleController::class, 'index']);
@@ -20,6 +21,7 @@ Route::get("/comments/view/{id}", [CommentController::class, 'view']);
 Route::post("/reacts/like", [ReactController::class, 'like']);
 Route::post("/reacts/unlike/{id}", [ReactController::class, 'unlike']);
 Route::get("/reacts/view/{id}", [ReactController::class, 'likeList']);
+Route::get("/users/profile/{id}", [ProfileController::class, 'profile']);
 
 Auth::routes();
 

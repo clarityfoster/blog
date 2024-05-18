@@ -20,14 +20,14 @@
             @endphp
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-start gap-3">
-                    <a href="#" class="text-decoration-none">
+                    <a href="{{ url("/users/profile/".$comment->user->id) }}" class="text-decoration-none">
                         <b class="h4 rounded-circle text-white d-flex justify-content-center align-items-center" style="width: 42px; height: 42px; background-color: 
                         {{ $color }};">
                             {{ substr($comment->user->name, 0, 1) }}
                         </b>
                     </a>
                     <div class="d-flex flex-column">
-                        <a href="#" class="text-decoration-none mb-2">
+                        <a href="{{ url("/users/profile/".$comment->user->id) }}" class="text-decoration-none mb-2">
                             <b class="h6 text-muted">{{ $comment->user->name }}</b>
                         </a>
                         <span>{{ $comment->content }}</span>

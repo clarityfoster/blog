@@ -31,6 +31,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function relationships() {
+        return $this->hasMany('App\Models\Relationship');
+    }
 
     /**
      * Get the attributes that should be cast.

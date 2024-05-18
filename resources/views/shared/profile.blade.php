@@ -1,4 +1,4 @@
-<a href="#" class="text-decoration-none">
+<a href="{{ url("/users/profile/".$article->user->id) }}" class="text-decoration-none">
     @php
         $colors = [
             '#FF5733', '#2E9944', '#3357FF', '#F1C40F', '#9B59B6', '#E67E22', '#1ABC9C', '#E74C3C', '#3498DB', '#2ECC71', '#F39C12', '#D35400', '#8E44AD', '#E74C3C',  '#9B59B6',
