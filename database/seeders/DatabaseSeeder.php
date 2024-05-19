@@ -30,5 +30,9 @@ class DatabaseSeeder extends Seeder
             "name" => "John",
             "email" => "john@gmail.com",
         ]);
+        $list = ['Single', 'In a relationship', 'Married', 'Engaged', 'Divorced'];
+        foreach($list as $name) {
+            \App\Models\Relationship::factory()->create(['name' => $name]);
+        }
     }
 }

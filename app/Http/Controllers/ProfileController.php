@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\User;
-use App\Models\Relationship;
 
 class ProfileController extends Controller
 {

@@ -31,13 +31,13 @@ class UserFactory extends Factory
             'rs_id' => rand(1, 5),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'rs_status' => fake()->randomElement([
-                'Single',
-                'In a relationship', 
-                'Engaged', 
-                'Divorced', 
-                'In an open relationship'
-            ])
+            // 'rs_status' => fake()->randomElement([
+            //     'Single',
+            //     'In a relationship', 
+            //     'Engaged', 
+            //     'Divorced', 
+            //     'In an open relationship'
+            // ])
         ];
     }
 

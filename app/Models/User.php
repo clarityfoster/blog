@@ -18,6 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'user_id',
         'email',
         'password',
     ];
@@ -31,8 +32,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    public function relationships() {
-        return $this->hasMany('App\Models\Relationship');
+    
+    public function relationship() {
+        return $this->hasOne('App\Models\Relationship');
     }
 
     /**

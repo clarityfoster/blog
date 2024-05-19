@@ -42,7 +42,11 @@
                         <p class="mb-1">
                             <i class="bi bi-hearts me-2"></i>
                             <b>
-                                {{$user->rs_status}}
+                                @if ($user->relationship)
+                                    {{ $user->relationship->name }}
+                                @else
+                                    Null 
+                                @endif
                             </b>
                         </p>
                         <p class="mb-1">
