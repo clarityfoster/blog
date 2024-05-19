@@ -32,9 +32,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function profile() {
+        return $this->belongsTo("\App\Models\Profile");
+    }
     
     public function relationship() {
-        return $this->hasOne('App\Models\Relationship');
+        return $this->belongsTo('App\Models\Relationship');
     }
 
     /**

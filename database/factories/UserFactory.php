@@ -28,16 +28,9 @@ class UserFactory extends Factory
             'bio' => fake()->sentence(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'rs_id' => rand(1, 5),
+            'relationship_id' => rand(1, 5),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            // 'rs_status' => fake()->randomElement([
-            //     'Single',
-            //     'In a relationship', 
-            //     'Engaged', 
-            //     'Divorced', 
-            //     'In an open relationship'
-            // ])
         ];
     }
 

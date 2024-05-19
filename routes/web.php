@@ -21,7 +21,11 @@ Route::get("/comments/view/{id}", [CommentController::class, 'view']);
 Route::post("/reacts/like", [ReactController::class, 'like']);
 Route::post("/reacts/unlike/{id}", [ReactController::class, 'unlike']);
 Route::get("/reacts/view/{id}", [ReactController::class, 'likeList']);
-Route::get("/users/profile/{id}", [ProfileController::class, 'profile']);
+Route::get("/users/profile/{id}", [ProfileController::class, 'profile'])->name("profile");
+Route::get("/users/profile/edit/{id}", [ProfileController::class, 'edit']);
+Route::post("/users/profile/edit/{id}", [ProfileController::class, 'update']);
+Route::get("/users/profile/edit-bio/{id}", [ProfileController::class, 'editBio']);
+Route::post("/users/profile/edit-bio/{id}", [ProfileController::class, 'updateBio']);
 
 Auth::routes();
 

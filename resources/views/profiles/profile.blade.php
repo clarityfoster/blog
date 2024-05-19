@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container" style="max-width: 500px">
+        @include('shared.alerts')
         <div class="card p-1">
             <div class="card-body">
                 @php
@@ -30,48 +31,50 @@
                     {{ $color }};">
                         {{ substr($user->name, 0, 1) }}
                     </b>
-                    <b class="h4 text-dark mt-2">{{ $user->name }}</b>
+                    <b class="h3 text-dark mt-2">{{ $user->name }}</b>
                     <p class="text-success text-center">
-                        {{ $user->bio }}
+                        {{ $user->bio }} 
+                        @auth
+                            <a href="{{ url("/users/profile/edit-bio/$user->id") }}" class="text-decoration-none text-muted ms-2">
+                                <i class="bi bi-pencil-square me-1"></i>
+                            </a>
+                        @endauth
                     </p>
-                    <div class="d-flex flex-column text-muted my-2">
+                    <div class="d-flex flex-column text-dark fs-5 my-2">
                         <p class="mb-1">
-                            <i class="bi bi-envelope-fill me-2"></i>
+                            <i class="bi bi-envelope-fill text-info fs-4 me-3"></i>
                             <b class="text-lowercase">{{ $user->email }}</b>
                         </p>
                         <p class="mb-1">
-                            <i class="bi bi-hearts me-2"></i>
-                            <b>
+                            <i class="bi bi-hearts text-danger fs-4 me-3"></i>
+                            <b class="me-3">
                                 @if ($user->relationship)
                                     {{ $user->relationship->name }}
-                                @else
-                                    Null 
+                                @else 
+                                    <b class="text-muted">Hidden</b>
                                 @endif
                             </b>
+                            <a href="{{ url("/users/profile/edit/$user->id") }}" class="text-decoration-none text-muted small">
+                                <i class="bi bi-pencil-square me-1"></i>
+                            </a>
                         </p>
                         <p class="mb-1">
-                            <i class="bi bi-clock-fill me-2"></i>
+                            <i class="bi bi-clock-fill fs-4 text-success me-3"></i>
                             <b class="">
                                 Joined at {{ $user->created_at->diffForHumans() }}
                             </b>
                         </p>
                         <p>
-                            <i class="bi bi-rss-fill me-2"></i>
+                            <i class="bi bi-rss-fill fs-4 text-secondary me-3"></i>
                             <b class="">
                                 {{ $user->followers }} Followers
                             </b>
                         </p>
                     </div>
-                    <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-primary fs-5 mb-3">
-                            <i class="bi bi-pencil-square me-1"></i>
-                            Edit Profile
-                        </a>
-                        <a href="#" class="btn btn-danger fs-5 mb-3">
-                            <i class="bi bi-slash-circle-fill me-1"></i>
-                            Block
-                        </a>
-                    </div>
+                    <a href="#" class="btn btn-danger mb-3">
+                        <i class="bi bi-slash-circle-fill me-1"></i>
+                        Block
+                    </a>
 
                 </div>
             </div>

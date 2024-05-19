@@ -31,7 +31,7 @@ class ArticleController extends Controller
             $article->delete();
             return redirect('/articles')->with('article-delete', 'Article deleted');
         } else {
-            return back()->with();
+            return back();
         }
     }
     public function add() {
@@ -68,7 +68,7 @@ class ArticleController extends Controller
                 'categories' => $category,
             ]);
         } else {
-            return back()->with();
+            return back();
         }
     }
     public function update($id) {

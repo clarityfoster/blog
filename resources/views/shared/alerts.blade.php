@@ -49,3 +49,21 @@
         {{ session('no-update') }}
     </div>
 @endif
+
+@if(session('bio-updated'))
+    <div class="alert alert-success">
+        {{ session('bio-updated') }}
+    </div>
+@endif
+
+@if (session("rs-status-fixed"))
+    <div class="alert alert-success">
+        {{ session("rs-status-fixed") }}
+    </div>
+@endif
+@if (session("edit-rs"))
+    <div class="alert alert-warning">
+        {{ session("edit-rs") }}
+    </div>
+@endif
+
