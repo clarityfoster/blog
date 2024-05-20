@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\User;
 use App\Models\Relationship;
+use App\Models\Follow;
 
 class ProfileController extends Controller
 {

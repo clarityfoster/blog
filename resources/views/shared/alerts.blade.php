@@ -66,4 +66,19 @@
         {{ session("edit-rs") }}
     </div>
 @endif
+@if (session("following"))
+    <div class="alert alert-success">
+        {{ session("following") }}
+    </div>
+@endif
+@if (session("already-followed"))
+    <div class="alert alert-warning">
+        {{ session("already-followed") }}
+    </div>
+@endif
+@if (session("unfollow"))
+    <div class="alert alert-danger">
+        {{ session("unfollow") }}
+    </div>
+@endif
 

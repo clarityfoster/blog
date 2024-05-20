@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at');
             $table->integer('relationship_id');
+            $table->integer('follow_id');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

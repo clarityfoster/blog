@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    @php
+        $follow = $user->followers->where('current_user_id', auth()->user()->id)->first();
+    @endphp
     <div class="container" style="max-width: 500px">
         @include('shared.alerts')
         <div class="card p-1">
@@ -33,11 +36,14 @@
                     </b>
                     <b class="h3 text-dark mt-2">{{ $user->name }}</b>
                     <p class="text-success text-center">
-                        {{ $user->bio }} 
+                        {{ $user->bio }}
                         @auth
-                            <a href="{{ url("/users/profile/edit-bio/$user->id") }}" class="text-decoration-none text-muted ms-2">
-                                <i class="bi bi-pencil-square me-1"></i>
-                            </a>
+                            @can('edit-rs', $user)
+                                <a href="{{ url("/users/profile/edit-bio/$user->id") }}"
+                                    class="text-decoration-none text-muted ms-2">
+                                    <i class="bi bi-pencil-square me-1"></i>
+                                </a>
+                            @endcan
                         @endauth
                     </p>
                     <div class="d-flex flex-column text-dark fs-5 my-2">
@@ -50,13 +56,18 @@
                             <b class="me-3">
                                 @if ($user->relationship)
                                     {{ $user->relationship->name }}
-                                @else 
+                                @else
                                     <b class="text-muted">Hidden</b>
                                 @endif
                             </b>
-                            <a href="{{ url("/users/profile/edit/$user->id") }}" class="text-decoration-none text-muted small">
-                                <i class="bi bi-pencil-square me-1"></i>
-                            </a>
+                            @auth
+                                @can('edit-bio', $user)
+                                    <a href="{{ url("/users/profile/edit/$user->id") }}"
+                                        class="text-decoration-none text-muted small">
+                                        <i class="bi bi-pencil-square me-1"></i>
+                                    </a>
+                                @endcan
+                            @endauth
                         </p>
                         <p class="mb-1">
                             <i class="bi bi-clock-fill fs-4 text-success me-3"></i>
@@ -64,18 +75,56 @@
                                 Joined at {{ $user->created_at->diffForHumans() }}
                             </b>
                         </p>
-                        <p>
+                        <p class="mb-1">
                             <i class="bi bi-rss-fill fs-4 text-secondary me-3"></i>
-                            <b class="">
-                                {{ $user->followers }} Followers
-                            </b>
+                            <a href="#" class="text-decoration-none text-dark">
+                                <b>{{ count($user->followers) }}
+                                    @if (count($user->followers) <= 1)
+                                        Follower
+                                    @else
+                                        Followers
+                                    @endif
+                                </b>
+                            </a>
+                        </p>
+                        <p>
+                            <i class="bi bi-check-square-fill fs-4 text-secondary me-3"></i>
+                            <a href="#" class="text-decoration-none text-dark">
+                                <b>
+                                    @if (7)
+                                        Following
+                                    @else
+                                        Followings
+                                    @endif
+                                </b>
+                            </a>
                         </p>
                     </div>
-                    <a href="#" class="btn btn-danger mb-3">
-                        <i class="bi bi-slash-circle-fill me-1"></i>
-                        Block
-                    </a>
-
+                    @if (auth()->user()->id !== $user->id)
+                        <div class="d-flex gap-3">
+                            @if ($follow)
+                                <form action="{{ url("/users/profile/unfollow/$user->id") }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-success mb-3 fs-5">
+                                        <i class="bi bi-check-circle-fill me-1"></i>
+                                        Following
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ url("/users/profile/follow/$user->id") }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-primary mb-3 fs-5">
+                                        <i class="bi bi-plus-circle-fill me-1"></i>
+                                        Follow
+                                    </button>
+                                </form>
+                            @endif
+                            <button class="btn btn-danger mb-3 fs-5">
+                                <i class="bi bi-slash-circle-fill me-1"></i>
+                                Block
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

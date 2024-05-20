@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Comment::factory(40)->create();
         \App\Models\Category::factory(5)->create();
         \App\Models\React::factory(15)->create();
+        \App\Models\Follow::factory(3)->create();
 
         \App\Models\User::factory()->create([
             "name" => "Alice",

@@ -1,6 +1,6 @@
 {{ $articles->links('pagination::bootstrap-4') }}
 @foreach ($articles as $article)
-<div class="card p-1 mb-3">
+<div class="card p-2 mb-3">
     <div class="card-body">
         @php
             $colors = [

@@ -40,6 +40,12 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Relationship');
     }
 
+    public function followers() {
+        return $this->hasMany(Follow::class, 'user_id');
+    }
+    public function following() {
+        return $this->hasMany(Follow::class, 'current_user_id');
+    }
     /**
      * Get the attributes that should be cast.
      *

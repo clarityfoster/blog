@@ -1,4 +1,4 @@
-<div class="card p-1 mb-2">
+<div class="card p-2 mb-2">
     <div class="card-body">
         @php
             $colors = [

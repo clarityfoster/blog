@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Relationship>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Follow>
  */
-class RelationshipFactory extends Factory
+class FollowFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class RelationshipFactory extends Factory
     public function definition(): array
     {
         return [
-            // 
+            'current_user_id' => rand(1, 3),
+            'user_id' => rand(1, 3),
         ];
     }
 }
