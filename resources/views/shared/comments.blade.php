@@ -1,33 +1,50 @@
 <ul class="list-group mb-2">
     <li class="list-group-item active">
-        <b>
-            @if ( count($article->comments) <= 1 )
+        <b class="h5">
+            @if (count($article->comments) <= 1)
                 Comment
             @else
                 Comments
             @endif
-            ( {{ count($article->comments) }} )
+            <span class="badge rounded-pill text-bg-light float-end text-primary">
+                {{ count($article->comments) }}
+            </span>
         </b>
     </li>
     @foreach ($article->comments as $comment)
-        <li class="list-group-item"> 
+        <li class="list-group-item">
             @php
                 $colors = [
-                    '#FF5733', '#2E9944', '#3357FF', '#F1C40F', '#9B59B6', '#E67E22', '#1ABC9C', '#E74C3C', '#3498DB', '#2ECC71', '#F39C12', '#D35400', '#8E44AD', '#E74C3C',  '#9B59B6',
+                    '#FF5733',
+                    '#2E9944',
+                    '#3357FF',
+                    '#F1C40F',
+                    '#9B59B6',
+                    '#E67E22',
+                    '#1ABC9C',
+                    '#E74C3C',
+                    '#3498DB',
+                    '#2ECC71',
+                    '#F39C12',
+                    '#D35400',
+                    '#8E44AD',
+                    '#E74C3C',
+                    '#9B59B6',
                 ];
                 $colorIndex = $comment->user->id % count($colors);
                 $color = $colors[$colorIndex];
             @endphp
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-start gap-3">
-                    <a href="{{ url("/users/profile/".$comment->user->id) }}" class="text-decoration-none">
-                        <b class="h4 rounded-circle text-white d-flex justify-content-center align-items-center" style="width: 42px; height: 42px; background-color: 
+                    <a href="{{ url('/users/profile/' . $comment->user->id) }}" class="text-decoration-none">
+                        <b class="h4 rounded-circle text-white d-flex justify-content-center align-items-center"
+                            style="width: 42px; height: 42px; background-color: 
                         {{ $color }};">
                             {{ substr($comment->user->name, 0, 1) }}
                         </b>
                     </a>
-                    <div class="d-flex flex-column">
-                        <a href="{{ url("/users/profile/".$comment->user->id) }}" class="text-decoration-none mb-2">
+                    <div class="d-flex flex-column justify-content-center">
+                        <a href="{{ url('/users/profile/'.$comment->user->id) }}" class="text-decoration-none mb-1">
                             <b class="h6 text-muted">{{ $comment->user->name }}</b>
                         </a>
                         <span>{{ $comment->content }}</span>
@@ -37,7 +54,7 @@
                         </small>
                     </div>
                 </div>
-                @auth 
+                @auth
                     @can('comment-delete', $comment)
                         <a href="{{ url("/comments/delete/$comment->id") }}" class="btn-close float-end"></a>
                     @endcan
@@ -47,11 +64,11 @@
     @endforeach
 </ul>
 @auth
-    <form action="{{ url("/comments/add") }}" method="POST">
+    <form action="{{ url('/comments/add') }}" method="POST">
         @csrf
         <input type="hidden" name="article_id" value="{{ $article->id }}">
         <textarea name="content" class="form-control mb-2" placeholder="New Comment"></textarea>
-        <a href="{{ url("/articles") }}" class="btn btn-secondary">
+        <a href="{{ url('/articles') }}" class="btn btn-secondary">
             <i class="bi bi-arrow-left"></i> Back
         </a>
         <input type="submit" value="Add Comment" class="btn btn-primary">

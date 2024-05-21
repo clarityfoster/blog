@@ -41,10 +41,10 @@ class User extends Authenticatable
     }
 
     public function followers() {
-        return $this->hasMany(Follow::class, 'user_id');
+        return $this->hasMany(Follow::class, 'user_id'); //Profile user id
     }
     public function following() {
-        return $this->hasMany(Follow::class, 'current_user_id');
+        return $this->hasMany(Follow::class, 'current_user_id'); //current log in user id
     }
     /**
      * Get the attributes that should be cast.

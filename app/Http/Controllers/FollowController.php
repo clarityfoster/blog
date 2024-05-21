@@ -47,4 +47,10 @@ class FollowController extends Controller
             'user' => $users,
         ]);
     }
+    public function followingList($id) {
+        $users = User::findOrFail($id);
+        return view("profiles.following", [
+            'user' => $users,
+        ]);
+    }
 }

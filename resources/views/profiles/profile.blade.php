@@ -77,7 +77,7 @@
                         </p>
                         <p class="mb-1">
                             <i class="bi bi-rss-fill fs-4 text-secondary me-3"></i>
-                            <a href="#" class="text-decoration-none text-dark">
+                            <a href="{{ url("/users/profile/followers/$user->id") }}" class="text-decoration-none text-dark">
                                 <b>{{ count($user->followers) }}
                                     @if (count($user->followers) <= 1)
                                         Follower
@@ -89,9 +89,9 @@
                         </p>
                         <p>
                             <i class="bi bi-check-square-fill fs-4 text-secondary me-3"></i>
-                            <a href="#" class="text-decoration-none text-dark">
-                                <b>
-                                    @if (7)
+                            <a href="{{ url("/users/profile/following/$user->id") }}" class="text-decoration-none text-dark">
+                                <b>{{ count($user->following) }}
+                                    @if (count($user->following) <= 1)
                                         Following
                                     @else
                                         Followings

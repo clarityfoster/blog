@@ -8,7 +8,9 @@
                 @else
                     Likes
                 @endif
-                ({{ count($article->likes) }})
+                <span class="badge rounded-pill text-bg-light float-end text-primary">
+                    {{ count($article->likes) }}
+                </span>
             </b>
             @foreach ($article->likes as $like) 
                 <li class="list-group-item">

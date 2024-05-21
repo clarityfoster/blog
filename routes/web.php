@@ -30,7 +30,7 @@ Route::post("/users/profile/edit-bio/{id}", [ProfileController::class, 'updateBi
 Route::post("/users/profile/follow/{id}", [FollowController::class, 'follow']);
 Route::post("/users/profile/unfollow/{id}", [FollowController::class, 'unfollow']);
 Route::get("/users/profile/followers/{id}", [FollowController::class, 'followersList']);
-
+Route::get("/users/profile/following/{id}", [FollowController::class, 'followingList']);
 
 Auth::routes();
 

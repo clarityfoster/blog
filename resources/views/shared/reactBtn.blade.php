@@ -21,9 +21,9 @@
                 <form action="{{ url("/reacts/like")}}"  method="post">
                     @csrf
                     <input type="hidden" name="article_id" value="{{ $article->id }}">
-                    <button type="submit" class="btn btn-link p-0">
-                        <i class="bi bi-heart fs-4 text-danger"></i>
-                    </button>
+                        <button type="submit" class="btn btn-link p-0">
+                            <i class="bi bi-heart fs-4 text-danger"></i>
+                        </button>
                     <a href="{{ url("/reacts/view/$article->id") }}" class="text-decoration-none text-dark">
                         @if (count($article->likes) >= 1 )   
                             <b>{{ count($article->likes) }}</b>

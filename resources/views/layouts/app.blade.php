@@ -41,7 +41,7 @@
                         <ul class="navbar-nav me-auto">
                             @if (Request::path() !== 'articles/add')
                                 <li class="nav-item">
-                                    <a href="{{ url('/articles/add') }}" class="nav-link text-secondary"> + Add Article</a>
+                                    <a href="{{ url('/articles/add') }}" class="nav-link text-success"> + Add Article</a>
                                 </li>
                             @endif
                         </ul>
@@ -64,7 +64,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                <a id="navbarDropdown" class="btn btn-primary dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
