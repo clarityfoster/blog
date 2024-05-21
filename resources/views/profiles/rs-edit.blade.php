@@ -3,7 +3,7 @@
     <div class="container mt-5" style="max-width: 700px">
         @include('shared.alerts')
         <div class="mb-3">
-            <h4 class="h3 text-info">Profile Edit Page</h4>
+            <h4 class="h3 text-info">Relationship Edit Page</h4>
         </div>
         <form action="{{ url("/users/profile/edit/".$user->id) }}" method="post">
             @csrf

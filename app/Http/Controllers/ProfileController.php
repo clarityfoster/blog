@@ -26,7 +26,7 @@ class ProfileController extends Controller
         $relationships = Relationship::all();
 
         if(Gate::allows("edit-rs", $profileUser)) {
-            return view('profiles.profileEdit', [
+            return view('profiles.rs-edit', [
                 "user" => $profileUser,
                 "relationship" => $relationships,
             ]);
@@ -48,7 +48,7 @@ class ProfileController extends Controller
         $currentUser = Auth::user();
         $profileUser = User::find($id);
         if(Gate::allows("edit-bio", $profileUser)) {
-            return view('profiles.editBio', [
+            return view('profiles.edit-bio', [
                 'user' => $profileUser,
             ]);
         } else {

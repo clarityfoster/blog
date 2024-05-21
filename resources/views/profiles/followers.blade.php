@@ -8,14 +8,21 @@
         @else
             <ul class="list-group">
                 <li class="h5 list-group-item active">
-                    <b>{{ $user->name }}'s Followers</b>
+                    <b>
+                        {{ $user->name }}'s 
+                        @if (count($user->followers) <= 1)
+                            Follower
+                        @else 
+                            Followers
+                        @endif
+                    </b>
                     <span class="badge rounded-pill text-bg-light float-end text-primary">
                         {{ count($user->followers) }}
                     </span>
                 </li>
                 @foreach ($user->followers as $follower)
                     <li class="list-group-item">
-                        @include('profiles.followerProfile')
+                        @include('profiles.follower-profile')
                     </li>
                 @endforeach
             </ul>

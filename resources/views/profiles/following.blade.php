@@ -15,7 +15,7 @@
                 </li>
                 @foreach ($user->following as $following)
                     <li class="list-group-item">
-                        @include('profiles.followingProfile')
+                        @include('profiles.following-profile')
                     </li>
                 @endforeach
             </ul>

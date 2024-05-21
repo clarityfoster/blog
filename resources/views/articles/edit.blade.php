@@ -2,6 +2,6 @@
 @section('content')
     <div class="container mt-4" style="max-width: 800px">
        @include('shared.alerts')
-        @include('forms.editForm')
+        @include('forms.edit-form')
     </div>
 @endsection

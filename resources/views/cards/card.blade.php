@@ -7,9 +7,9 @@
             $colorIndex = $article->user->id % count($colors);
             $color = $colors[$colorIndex];
         @endphp
-        @include('cards.cardHeader')
+        @include('cards.card-header')
         @include('cards.content')
-        @include('shared.reactBtn')
+        @include('shared.react-btn')
         @auth
            @can('article-delete', $article)
                 <a href="{{ url("/articles/delete/$article->id") }}" class="btn btn-danger">Delete</a>

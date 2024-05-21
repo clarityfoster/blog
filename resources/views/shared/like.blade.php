@@ -1,5 +1,5 @@
 <div class="container" style="max-width: 600px">
-    @include('shared.seeArticle')
+    @include('shared.see-article')
     <ul class="list-group">
         <li class="list-group-item active">
             <b class="fs-5">
@@ -14,7 +14,7 @@
             </b>
             @foreach ($article->likes as $like) 
                 <li class="list-group-item">
-                    @include('shared.reactProfile')
+                    @include('shared.react-profile')
                 </li>
             @endforeach
         </li>
