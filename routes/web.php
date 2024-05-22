@@ -7,6 +7,7 @@ use App\Http\Controllers\ReactController;
 use App\Http\Controllers\DislikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', [ArticleController::class, 'index']);
 Route::get('/articles', [ArticleController::class, 'index']);
@@ -31,6 +32,7 @@ Route::post("/users/profile/follow/{id}", [FollowController::class, 'follow']);
 Route::post("/users/profile/unfollow/{id}", [FollowController::class, 'unfollow']);
 Route::get("/users/profile/followers/{id}", [FollowController::class, 'followersList']);
 Route::get("/users/profile/following/{id}", [FollowController::class, 'followingList']);
+Route::get("/users/search", [SearchController::class, 'search']);
 
 Auth::routes();
 

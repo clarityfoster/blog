@@ -2,9 +2,9 @@
 @section('content')
     <div class="container m-auto" style="max-width: 700px"> 
         @include('shared.alerts')
-        <div class="w-sm-100">
-            @include('shared.seeArticle')
-            @include('shared.comments')
+        <div class="w-sm-100 mt-5">
+            @include('shared.see-article')
+            @include('comments.comments')
         </div>
     </div>
 @endsection

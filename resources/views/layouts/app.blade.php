@@ -16,6 +16,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
 </head>
 
 <body>
@@ -49,7 +50,16 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        
+                        @auth
+                            <form method="GET" class="d-flex me-5" action="{{ url("/users/search") }}">
+                                <input type="text" class="form-control border border-primary rounded-pill me-2"
+                                    placeholder="Search" aria-label="Example text with button addon"
+                                    aria-describedby="button-addon1" name="query">
+                                <button class="btn btn-primary rounded-circle" type="submit" id="button-addon1">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </form>
+                        @endauth
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
