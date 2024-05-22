@@ -29,11 +29,7 @@
                     $color = $colors[$colorIndex];
                 @endphp
                 <div class="d-flex flex-column justify-content-center align-items-center mt-4">
-                    <b class="h1 rounded-circle text-white d-flex justify-content-center align-items-center"
-                        style="width: 100px; height: 100px; background-color: 
-                    {{ $color }};">
-                        {{ substr($user->name, 0, 1) }}
-                    </b>
+                    @include('profiles.profile-circle')
                     <b class="h3 text-dark mt-2">{{ $user->name }}</b>
                     <p class="text-success text-center">
                         {{ $user->bio }}

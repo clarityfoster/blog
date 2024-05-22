@@ -1,5 +1,5 @@
 <div class="d-flex align-items-center justify-content-between">
-    <div class="d-flex align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
         <a href="{{ url("/users/profile/".$follower->current_user->id) }}" class="text-decoration-none">
             @php
                 $colors = [
@@ -15,7 +15,7 @@
         </a>
         <div class="d-flex flex-column">
             <a href="{{ url("/users/profile/".$follower->current_user->id) }}" class="text-decoration-none mb-2">
-                <b class="h6 text-muted">{{ $follower->current_user->name }}</b>
+                <b class="h5 text-dark">{{ $follower->current_user->name }}</b>
             </a>
         </div>
     </div>

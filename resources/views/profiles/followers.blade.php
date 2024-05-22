@@ -2,9 +2,12 @@
 @section('content')
     <div class="container m-auto" style="max-width: 600px">
         @if (count($user->followers) == 0)
-            <div class="alert alert-dark text-center m-auto mt-5" style="max-width: 450px">
-                <p class="h5 m-0">{{ $user->name }} doesn't have any followers yet.</p>
-            </div>
+        <ul class="list-group text-center m-auto" style="max-width: 500px">
+            <li class="h5 p-3 list-group-item bg-secondary text-light mt-5">
+                <i class="bi bi-exclamation-triangle-fill text-warning me-1"></i>
+                {{ $user->name }} doesn't have any followers yet.
+            </li>
+        </ul>
         @else
             <ul class="list-group">
                 <li class="h5 list-group-item active">

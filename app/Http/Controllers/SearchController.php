@@ -17,13 +17,14 @@ class SearchController extends Controller
         if($query) {
             $articles = Article::where('title', 'LIKE', "%{$query}%")
                                 ->orWhere('body', 'LIKE', "%{$query}%")
-                                ->paginate(5);
+                                ->get();
             $users = User::where('name', 'LIKE', "%{$query}%")->get();
         } else {
             return back();
         }
         return view('searchs.search-box', [
             'articles' => $articles,
+            'query' => $query,
             'user' => $users
         ]);
     }
