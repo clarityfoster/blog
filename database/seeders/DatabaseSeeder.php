@@ -35,5 +35,13 @@ class DatabaseSeeder extends Seeder
         foreach($list as $name) {
             \App\Models\Relationship::factory()->create(['name' => $name]);
         }
+        $privary = [
+            'Public' => 'bi bi-globe-americas',
+            'Followers' => 'bi bi-people-fill', 
+            'Only Me' => 'bi bi-lock-fill'
+        ];
+        foreach($privary as $name => $icons) {
+            \App\Models\Privacy::factory()->create(['name' => $name, 'icons' => $icons]);
+        }
     }
 }

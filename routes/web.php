@@ -28,6 +28,8 @@ Route::get("/users/profile/edit/{id}", [ProfileController::class, 'edit']);
 Route::post("/users/profile/edit/{id}", [ProfileController::class, 'update']);
 Route::get("/users/profile/edit-bio/{id}", [ProfileController::class, 'editBio']);
 Route::post("/users/profile/edit-bio/{id}", [ProfileController::class, 'updateBio']);
+Route::get("/users/profile/show-articles/{id}", [ProfileController::class, 'showArticles']);
+
 Route::post("/users/profile/follow/{id}", [FollowController::class, 'follow']);
 Route::post("/users/profile/unfollow/{id}", [FollowController::class, 'unfollow']);
 Route::get("/users/profile/followers/{id}", [FollowController::class, 'followersList']);

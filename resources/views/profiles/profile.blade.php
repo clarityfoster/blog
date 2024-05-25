@@ -5,7 +5,7 @@
     @endphp
     <div class="container" style="max-width: 500px">
         @include('shared.alerts')
-        <div class="card p-1">
+        <div class="card p-1 mb-3">
             <div class="card-body">
                 @php
                     $colors = [
@@ -35,8 +35,7 @@
                         {{ $user->bio }}
                         @auth
                             @can('edit-rs', $user)
-                                <a href="{{ url("/users/profile/edit-bio/$user->id") }}"
-                                    class="text-decoration-none text-muted ms-2">
+                                <a href="{{ url("/users/profile/edit-bio/$user->id") }}" class="text-decoration-none text-muted ms-2">
                                     <i class="bi bi-pencil-square me-1"></i>
                                 </a>
                             @endcan
@@ -73,7 +72,8 @@
                         </p>
                         <p class="mb-1">
                             <i class="bi bi-rss-fill fs-4 text-secondary me-3"></i>
-                            <a href="{{ url("/users/profile/followers/$user->id") }}" class="text-decoration-none text-dark">
+                            <a href="{{ url("/users/profile/followers/$user->id") }}"
+                                class="text-decoration-none text-dark">
                                 <b>{{ count($user->followers) }}
                                     @if (count($user->followers) <= 1)
                                         Follower
@@ -85,7 +85,8 @@
                         </p>
                         <p>
                             <i class="bi bi-check-square-fill fs-4 text-secondary me-3"></i>
-                            <a href="{{ url("/users/profile/following/$user->id") }}" class="text-decoration-none text-dark">
+                            <a href="{{ url("/users/profile/following/$user->id") }}"
+                                class="text-decoration-none text-dark">
                                 <b>{{ count($user->following) }}
                                     @if (count($user->following) <= 1)
                                         Following
@@ -97,11 +98,11 @@
                         </p>
                     </div>
                     @if (auth()->user()->id !== $user->id)
-                        <div class="d-flex gap-3">
+                        <div class="d-flex gap-2">
                             @if ($follow)
                                 <form action="{{ url("/users/profile/unfollow/$user->id") }}" method="post">
                                     @csrf
-                                    <button class="btn btn-success mb-3 fs-5">
+                                    <button class="btn btn-success fs-5">
                                         <i class="bi bi-check-circle-fill me-1"></i>
                                         Following
                                     </button>
@@ -109,20 +110,44 @@
                             @else
                                 <form action="{{ url("/users/profile/follow/$user->id") }}" method="post">
                                     @csrf
-                                    <button class="btn btn-primary mb-3 fs-5">
+                                    <button class="btn btn-primary fs-5">
                                         <i class="bi bi-plus-circle-fill me-1"></i>
                                         Follow
                                     </button>
                                 </form>
                             @endif
-                            <button class="btn btn-danger mb-3 fs-5">
+                            <button class="btn btn-danger fs-5" style="max-height: 42px">
                                 <i class="bi bi-slash-circle-fill me-1"></i>
                                 Block
                             </button>
                         </div>
                     @endif
+                    @if ($follow)
+                        <button id="show-post" class="btn btn-outline-secondary">{{ $user->name }}'s Posts</button>
+                    @endif
                 </div>
             </div>
         </div>
+
+        <div id="user-articles" style="display: none">
+            @foreach ($user->articles as $article)
+                @include('cards.card')
+            @endforeach
+        </div>
     </div>
 @endsection
+
+<script>
+    addEventListener("DOMContentLoaded", function() {
+        const showPost = document.getElementById("show-post");
+        const articlesDiv = document.getElementById("user-articles");
+
+        showPost.addEventListener("click", function() {
+            if (articlesDiv.style.display === "none") {
+                articlesDiv.style.display = "block";
+            } else {
+                articlesDiv.style.display = "none";
+            }
+        });
+    });
+</script>

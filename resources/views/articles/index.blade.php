@@ -2,7 +2,7 @@
 @section('content')
     <div class="container m-auto px-3" style="max-width: 700px">
         @include('shared.alerts')
-        {{ $articles->links('pagination::bootstrap-4') }}
+        {{ $articles->links() }}
         @include('cards.cards')
     </div>
 @endsection

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\Article; 
 use App\Models\Category;
+use App\Models\Privacy;
+use App\Models\User;
 
 class ArticleController extends Controller
 {
@@ -37,9 +39,11 @@ class ArticleController extends Controller
     public function add() {
         $categories = Category::all();
         $articles = Article::all();
+        $privacies = Privacy::all();
         return view('articles.add', [
             'category' => $categories,
             'article' => $articles,
+            'privacy' => $privacies
         ]);
     }
     public function create() {
@@ -55,17 +59,22 @@ class ArticleController extends Controller
         $article->title = request()->title;
         $article->body = request()->body;
         $article->category_id = request()->category_id;
+        $article->privacy_id = request()->privacy_id;
         $article->user_id = auth()->user()->id;
         $article->save();
         return redirect('/articles')->with('article-create', 'Article created');
     }
     public function edit($id) {
+        $users = User::find($id);
         $articles = Article::find($id);
         $category = Category::all();
+        $privacy = Privacy::all();
         if(Gate::allows('article-edit', $articles)) {
             return view('articles.edit', [
                 'article' => $articles,
                 'categories' => $category,
+                'privacies' => $privacy,
+                'user' => $users,
             ]);
         } else {
             return back();
@@ -77,7 +86,8 @@ class ArticleController extends Controller
         if(
             $article->title == request()->title &&
             $article->body == request()->body &&
-            $article->category_id == request()->category_id 
+            $article->category_id == request()->category_id &&
+            $article->privacy_id == request()->privacy_id 
         ) {
             return back()->with("no-update", "Nothing to update");
         }
@@ -85,6 +95,7 @@ class ArticleController extends Controller
         $article->title = request()->title;
         $article->body = request()->body;
         $article->category_id = request()->category_id;
+        $article->privacy_id = request()->privacy_id;
         $article->update();
 
         return redirect("/articles/detail/$id")->with('article-update', 'Article updated');

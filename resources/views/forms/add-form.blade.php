@@ -19,5 +19,15 @@
             @endforeach
         </select>
     </div>
+    <div class="mb-3">
+        <label for="privacy">Privacy</label>
+        <select name="privacy_id" class="form-select">
+            @foreach ($privacy as $privacies)
+                <option value="{{ $privacies->id }}">
+                    <i class="{{ $privacies->icons }}"></i> {{ $privacies->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
     <input type="submit" value="Add Article" class="btn btn-primary">
 </form>

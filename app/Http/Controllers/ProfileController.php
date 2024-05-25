@@ -64,4 +64,12 @@ class ProfileController extends Controller
         $user->save();
         return redirect()->route('profile', ['id' => $user->id])->with('bio-updated', 'Bio updated successfully');
     }
+    public function showArticles($id) {
+        $users = User::findOrFail($id);
+        $articles = Article::find($id);
+        return view('profiles.profile', [
+            'user' => $users,
+            'articles' => $articles
+        ]);
+    }
 }

@@ -21,4 +21,7 @@ class Article extends Model
     public function likes() {
         return $this->hasMany('App\Models\React');
     }
+    public function privacy() {
+        return $this->belongsTo('App\Models\Privacy');
+    }
 }

@@ -42,7 +42,7 @@
                         <ul class="navbar-nav me-auto">
                             @if (Request::path() !== 'articles/add')
                                 <li class="nav-item">
-                                    <a href="{{ url('/articles/add') }}" class="nav-link text-success"> + Add Article</a>
+                                    <a href="{{ url('/articles/add') }}" class="nav-link text-success"> + Add Post</a>
                                 </li>
                             @endif
                         </ul>
@@ -51,7 +51,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         @auth
-                            <form method="GET" class="input-group me-5" action="{{ url("/users/search") }}">
+                            <form method="GET" class="input-group me-2" action="{{ url("/users/search") }}">
                                 <input type="text" class="form-control"
                                     placeholder="Search" aria-label="Example text with button addon"
                                     aria-describedby="button-addon1" name="query">

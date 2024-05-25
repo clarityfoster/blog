@@ -32,8 +32,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    public function profile() {
-        return $this->belongsTo("\App\Models\Profile");
+    public function articles() {
+        return $this->hasMany("App\Models\Article");
     }
     
     public function relationship() {
