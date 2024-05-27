@@ -45,11 +45,10 @@
                     </a>
                     <div class="d-flex flex-column justify-content-center">
                         <div class="d-flex align-items-center gap-2">
-                            <a href="{{ url('/users/profile/' . $comment->user->id) }}" class="text-decoration-none mb-1">
+                            <a href="{{ url('/users/profile/' . $comment->user->id) }}" class="text-decoration-none">
                                 <b class="h6 text-muted">{{ $comment->user->name }}</b>
                             </a>
                             <small class="small text-success">
-                                {{-- <i class="bi bi-clock"></i> --}}
                                 {{ $comment->created_at->diffForHumans() }}
                             </small>
                         </div>
