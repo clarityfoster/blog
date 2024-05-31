@@ -35,7 +35,8 @@
                         {{ $user->bio }}
                         @auth
                             @can('edit-rs', $user)
-                                <a href="{{ url("/users/profile/edit-bio/$user->id") }}" class="text-decoration-none text-muted ms-2">
+                                <a href="{{ url("/users/profile/edit-bio/$user->id") }}"
+                                    class="text-decoration-none text-muted ms-2">
                                     <i class="bi bi-pencil-square me-1"></i>
                                 </a>
                             @endcan
@@ -98,7 +99,7 @@
                         </p>
                     </div>
                     @if (auth()->user()->id !== $user->id)
-                        <div class="d-flex gap-2">
+                        <div class="d-flex gap-2 mb-2">
                             @if ($follow)
                                 <form action="{{ url("/users/profile/unfollow/$user->id") }}" method="post">
                                     @csrf
@@ -122,32 +123,8 @@
                             </button>
                         </div>
                     @endif
-                    @if ($follow)
-                        <button id="show-post" class="btn btn-outline-secondary">{{ $user->name }}'s Posts</button>
-                    @endif
                 </div>
             </div>
         </div>
-
-        <div id="user-articles" style="display: none">
-            @foreach ($user->articles as $article)
-                @include('cards.card')
-            @endforeach
-        </div>
     </div>
 @endsection
-
-<script>
-    addEventListener("DOMContentLoaded", function() {
-        const showPost = document.getElementById("show-post");
-        const articlesDiv = document.getElementById("user-articles");
-
-        showPost.addEventListener("click", function() {
-            if (articlesDiv.style.display === "none") {
-                articlesDiv.style.display = "block";
-            } else {
-                articlesDiv.style.display = "none";
-            }
-        });
-    });
-</script>

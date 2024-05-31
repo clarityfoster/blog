@@ -16,7 +16,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    
+
 </head>
 
 <body>
@@ -40,9 +40,19 @@
                     @endphp
                     @auth
                         <ul class="navbar-nav me-auto">
+                            @if (Request::path() !== 'users/users-list')
+                                <li class="nav-item">
+                                    <a href="/users/users-list" class="nav-link text-muted">
+                                        <i class="bi bi-list-nested"></i>
+                                        Users List
+                                    </a>
+                                </li>
+                            @endif
                             @if (Request::path() !== 'articles/add')
                                 <li class="nav-item">
-                                    <a href="{{ url('/articles/add') }}" class="nav-link text-success"> + Add Post</a>
+                                    <a href="{{ url('/articles/add') }}" class="nav-link text-success">
+                                        + Add Post
+                                    </a>
                                 </li>
                             @endif
                         </ul>
@@ -51,15 +61,17 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         @auth
-                            <form method="GET" class="input-group me-2" action="{{ url("/users/search") }}">
-                                <input type="text" class="form-control"
-                                    placeholder="Search" aria-label="Example text with button addon"
-                                    aria-describedby="button-addon1" name="query">
+                            <form method="GET" class="input-group me-2" action="{{ url('/users/search') }}">
+                                <input type="text" class="form-control" placeholder="Search"
+                                    aria-label="Example text with button addon" aria-describedby="button-addon1"
+                                    name="query">
                                 <button class="btn btn-primary" type="submit" id="button-addon1">
                                     <i class="bi bi-search"></i>
                                 </button>
                             </form>
                         @endauth
+
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

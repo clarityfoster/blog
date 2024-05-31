@@ -18,10 +18,10 @@ class ArticleController extends Controller
         $category = Category::all();
         
         $data = Article::where(function ($query) use ($currentUser) {
-            $query->where('privacy_id', 1) // Public articles
+            $query->where('privacy_id', 1)
                   ->orWhere(function ($query) use ($currentUser) {
                       if ($currentUser) {
-                          $query->where('privacy_id', 2) // Followers only
+                          $query->where('privacy_id', 2)
                                 ->whereHas('user.followers', function ($query) use ($currentUser) {
                                     $query->where('current_user_id', $currentUser->id);
                                 });
@@ -29,7 +29,7 @@ class ArticleController extends Controller
                   })
                   ->orWhere(function ($query) use ($currentUser) {
                       if ($currentUser) {
-                          $query->where('privacy_id', 3) // Only me
+                          $query->where('privacy_id', 3)
                                 ->where('user_id', $currentUser->id);
                       }
                   });
