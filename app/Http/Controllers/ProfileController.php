@@ -44,6 +44,33 @@ class ProfileController extends Controller
         $user->update();
         return redirect()->route('profile', ['id' => $user->id])->with('rs-status-fixed', 'Relationship status updated successfully');
     }
+    public function uploadProfile($id) {
+        $currentUser = Auth::user();
+        $profileUser = User::find($id);
+        if(Gate::allows('profile-img', $profileUser)) {
+            return view('profiles.profile-img', [
+                'user' => $profileUser,
+            ]);
+        } else {
+            return back()->with('unanthorized', 'Unanthorized!');
+        }
+    }
+    public function createProfileImg($id) {
+        $validator = validator(request()->all(), [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2028',
+        ]);
+        if(($validator)->fails()) {
+            return back()->withErrors($validator);
+        }
+        $imgPath = request()->file('image')->store('profile-img', 'public');
+        $profileUser = User::findOrFail($id);
+        $profileUser->image = $imgPath;
+        $profileUser->save();
+        return redirect()->route('profile', [
+            'id' => $profileUser->id,
+            'user' => $profileUser,
+        ])->with('img-updated', 'Profile image updated successfully');
+    }
     public function editBio($id) {
         $currentUser = Auth::user();
         $profileUser = User::find($id);

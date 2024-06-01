@@ -82,3 +82,8 @@
     </div>
 @endif
 
+@if (session("img-updated"))
+    <div class="alert alert-info">
+        {{ session("img-updated") }}
+    </div>
+@endif

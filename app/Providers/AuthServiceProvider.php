@@ -40,6 +40,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('edit-rs', function($currentUser, $profileUser) {
             return $currentUser->id == $profileUser->id;
         });
-        // insert into `reacts` (`user_id`, `article_id`, `updated_at`, `created_at`) values (1, 24, 2024-05-15 12:04:24, 2024-05-15 12:04:24)
+        Gate::define('profile-img', function($currentUser, $profileUser) {
+            return $currentUser->id == $profileUser->id;
+        });
     }
 }

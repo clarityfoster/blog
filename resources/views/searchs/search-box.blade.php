@@ -35,11 +35,18 @@
                     @endphp
                     <a href="{{ url("/users/profile/$users->id") }}"
                         class="list-group-item d-flex align-items-center gap-2 mb-1">
-                        <b class="h4 rounded-circle text-white d-flex justify-content-center        align-items-center"
-                            style="width: 42px; height: 42px; background-color: 
-                {{ $color }};">
-                            {{ substr($users->name, 0, 1) }}
-                        </b>
+                        @if ($users->image)
+                            <img src="{{ asset('storage/' . $users->image) }}"
+                                alt="{{ $users->name }}"
+                                class="rounded-circle text-white d-flex justify-content-center align-items-center object-fit-cover"
+                                style="width: 55px; height: 55px;">
+                        @else
+                            <b class="h4 rounded-circle text-white d-flex justify-content-center align-items-center"
+                            style="width: 55px; height: 55px; background-color: 
+                            {{ $color }};">
+                                {{ substr($users->name, 0, 1) }}
+                            </b>
+                        @endif
                         <b class="h5 mb-2">{{ $users->name }}</b>
                     </a>
                 @endforeach

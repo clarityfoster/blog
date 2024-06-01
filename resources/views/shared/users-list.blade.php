@@ -10,7 +10,7 @@
                         Users List
                     @endif
                     <span class="badge rounded-pill text-bg-light float-end text-primary">
-                        {{ count($user)}}
+                        {{ count($user) }}
                     </span>
                 </b>
             </li>
@@ -40,11 +40,18 @@
                                     $colorIndex = $users->id % count($colors);
                                     $color = $colors[$colorIndex];
                                 @endphp
-                                <b class="h4 rounded-circle text-white d-flex justify-content-center align-items-center"
-                                    style="width: 42px; height: 42px; background-color: 
-                                {{ $color }};">
-                                    {{ substr($users->name, 0, 1) }}
-                                </b>
+                                @if ($users->image)
+                                    <img src="{{ asset('storage/' . $users->image) }}"
+                                        alt="{{ $users->name }}"
+                                        class="rounded-circle text-white d-flex justify-content-center align-items-center object-fit-cover"
+                                        style="width: 55px; height: 55px;">
+                                @else
+                                    <b class="h4 rounded-circle text-white d-flex justify-content-center align-items-center"
+                                    style="width: 55px; height: 55px; background-color: 
+                                    {{ $color }};">
+                                        {{ substr($users->name, 0, 1) }}
+                                    </b>
+                                @endif
                             </a>
                             <div class="d-flex flex-column">
                                 <a href="{{ url('/users/profile/' . $users->id) }}" class="text-decoration-none mb-2">

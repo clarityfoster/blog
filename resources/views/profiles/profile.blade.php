@@ -29,7 +29,21 @@
                     $color = $colors[$colorIndex];
                 @endphp
                 <div class="d-flex flex-column justify-content-center align-items-center mt-4">
-                    @include('profiles.profile-circle')
+
+                    @if ($user->image)
+                        <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}"
+                            class="rounded-circle text-white d-flex justify-content-center align-items-center object-fit-cover"
+                            style="width: 100px; height: 100px;">
+                    @else
+                        @include('profiles.profile-circle')
+                    @endif
+
+                    @can('profile-img', $user)
+                        <a href="{{ url("/users/profile/upload-profile/$user->id") }}"
+                            class="text-decoration-none text-muted small">
+                            <i class="bi bi-pencil-square me-1"></i>
+                        </a>
+                    @endcan
                     <b class="h3 text-dark mt-2">{{ $user->name }}</b>
                     <p class="text-success text-center">
                         {{ $user->bio }}
