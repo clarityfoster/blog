@@ -34,6 +34,7 @@ Route::post("/users/profile/edit-bio/{id}", [ProfileController::class, 'updateBi
 Route::get("/users/profile/show-articles/{id}", [ProfileController::class, 'showArticles']);
 Route::get("/users/profile/upload-profile/{id}", [ProfileController::class, 'uploadProfile']);
 Route::post("/users/profile/upload-profile/{id}", [ProfileController::class, 'createProfileImg']);
+Route::get("/users/profile/proimg-del/{id}", [ProfileController::class, 'profileImgDelete']);
 
 Route::post("/users/profile/follow/{id}", [FollowController::class, 'follow']);
 Route::post("/users/profile/unfollow/{id}", [FollowController::class, 'unfollow']);

@@ -40,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('edit-rs', function($currentUser, $profileUser) {
             return $currentUser->id == $profileUser->id;
         });
-        Gate::define('profile-img', function($currentUser, $profileUser) {
+        Gate::define('upload-img', function($currentUser, $profileUser) {
             return $currentUser->id == $profileUser->id;
         });
     }

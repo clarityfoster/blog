@@ -47,7 +47,7 @@ class ProfileController extends Controller
     public function uploadProfile($id) {
         $currentUser = Auth::user();
         $profileUser = User::find($id);
-        if(Gate::allows('profile-img', $profileUser)) {
+        if(Gate::allows('upload-img', $profileUser)) {
             return view('profiles.profile-img', [
                 'user' => $profileUser,
             ]);
@@ -55,22 +55,28 @@ class ProfileController extends Controller
             return back()->with('unanthorized', 'Unanthorized!');
         }
     }
-    public function createProfileImg($id) {
-        $validator = validator(request()->all(), [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2028',
-        ]);
-        if(($validator)->fails()) {
-            return back()->withErrors($validator);
-        }
-        $imgPath = request()->file('image')->store('profile-img', 'public');
+    public function createProfileImg($id) { 
         $profileUser = User::findOrFail($id);
-        $profileUser->image = $imgPath;
+    
+        if (request()->hasFile('image')) {
+            $imgPath = request()->file('image')->store('profile-img', 'public');
+            $profileUser->image = $imgPath;
+        }
+    
+        if (request()->hasFile('cover_image')) {
+            $coverImgPath = request()->file('cover_image')->store('cover-img', 'public');
+            $profileUser->cover_image = $coverImgPath;
+        }
+    
         $profileUser->save();
+    
         return redirect()->route('profile', [
             'id' => $profileUser->id,
             'user' => $profileUser,
-        ])->with('img-updated', 'Profile image updated successfully');
+        ])->with('profile-img-updated', 'Profile image updated successfully');
     }
+    
+
     public function editBio($id) {
         $currentUser = Auth::user();
         $profileUser = User::find($id);
@@ -83,6 +89,12 @@ class ProfileController extends Controller
         }
     }
     public function updateBio(Request $request, $id) {
+        $validator = validator(request()->all(), [
+            'bio' => "required|max:110",
+        ]);
+        if(($validator)->fails()) {
+            return back()->withErrors($validator);
+        }
         $user = User::find($id);
         if ($user->bio == request()->bio) {
             return back()->with("no-update", "Nothing to update");

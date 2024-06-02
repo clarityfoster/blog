@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
+            $table->string('cover_image')->nullable();
             $table->string('bio')->default('');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at');

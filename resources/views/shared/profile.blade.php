@@ -20,7 +20,6 @@
         $colorIndex = $article->user->id % count($colors);
         $color = $colors[$colorIndex];
     @endphp
-    </b>
     @if ($article->user->image)
         <img src="{{ asset('storage/' . $article->user->image) }}" alt="{{ $article->user->name }}"
             class="rounded-circle text-white d-flex justify-content-center align-items-center object-fit-cover"
@@ -28,7 +27,7 @@
     @else
         <b class="h4 rounded-circle text-white d-flex justify-content-center align-items-center"
             style="width: 55px; height: 55px; background-color: 
-        {{ $color }};">
+            {{ $color }};">
             {{ substr($article->user->name, 0, 1) }}
         </b> 
     @endif
