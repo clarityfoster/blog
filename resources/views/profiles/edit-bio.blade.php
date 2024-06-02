@@ -11,9 +11,7 @@
                 <label for="bio">Bio</label>
                 <input name="bio" type="text" class="form-control" value="{{ $user->bio }}">
             </div>
-            <a href="{{ url("/users/profile/$user->id") }}" class="btn btn-secondary ml-3">
-                <i class="bi bi-arrow-left"></i> Back
-            </a>
+            @include('shared.back-btn')
             <input type="submit" value="Update" class="btn btn-info text-white">
         </form>
     </div>

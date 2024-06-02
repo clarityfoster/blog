@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
+            $table->string('article_image')->nullable();
             $table->integer('category_id');
             $table->integer('user_id');
             $table->integer('privacy_id');

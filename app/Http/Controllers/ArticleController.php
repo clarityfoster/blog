@@ -17,29 +17,29 @@ class ArticleController extends Controller
     $currentUser = auth()->user();
     $category = Category::all();
     
-    $data = Article::where(function ($query) use ($currentUser) {
-        $query->where('privacy_id', 1) // Public articles
-              ->orWhere(function ($query) use ($currentUser) {
-                  if ($currentUser) {
-                      $query->where('privacy_id', 2) // Followers only
-                            ->whereHas('user.followers', function ($query) use ($currentUser) {
-                                $query->where('current_user_id', $currentUser->id);
-                            });
-                  }
-              })
-              ->orWhere(function ($query) use ($currentUser) {
-                  if ($currentUser) {
-                      $query->where('privacy_id', 3) // Only me
-                            ->where('user_id', $currentUser->id);
-                  }
-              });
-    })->latest()->paginate(4);
+        $data = Article::where(function ($query) use ($currentUser) {
+            $query->where('privacy_id', 1) // Public articles
+                ->orWhere(function ($query) use ($currentUser) {
+                    if ($currentUser) {
+                        $query->where('privacy_id', 2) // Followers only
+                                ->whereHas('user.followers', function ($query) use ($currentUser) {
+                                    $query->where('current_user_id', $currentUser->id);
+                                });
+                    }
+                })
+                ->orWhere(function ($query) use ($currentUser) {
+                    if ($currentUser) {
+                        $query->where('privacy_id', 3) // Only me
+                                ->where('user_id', $currentUser->id);
+                    }
+                });
+            })->latest()->paginate(4);
 
-    return view('articles.index', [
-        'articles' => $data,
-        'categories' => $category,
-    ]);
-}
+        return view('articles.index', [
+            'articles' => $data,
+            'categories' => $category,
+        ]);
+    }
 
     public function detail($id) {
         $data = Article::find($id);

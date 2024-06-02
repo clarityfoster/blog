@@ -44,6 +44,17 @@ class ProfileController extends Controller
         $user->update();
         return redirect()->route('profile', ['id' => $user->id])->with('rs-status-fixed', 'Relationship status updated successfully');
     }
+    public function indicators($id) {
+        $currentUser = Auth::user();
+        $profileUser = User::find($id);
+        if(Gate::allows('upload-img', $profileUser)) {
+            return view('profiles.indicate', [
+                'user' => $profileUser,
+            ]);
+        } else {
+            return back()->with('unanthorized', 'Unanthorized!');
+        }
+    }
     public function uploadProfile($id) {
         $currentUser = Auth::user();
         $profileUser = User::find($id);
@@ -55,17 +66,19 @@ class ProfileController extends Controller
             return back()->with('unanthorized', 'Unanthorized!');
         }
     }
-    public function createProfileImg($id) { 
+    public function createProfileImg(Request $request, $id) { 
+        $validator = validator($request->all(), [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2028',
+        ]);
+        
         $profileUser = User::findOrFail($id);
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
     
         if (request()->hasFile('image')) {
             $imgPath = request()->file('image')->store('profile-img', 'public');
             $profileUser->image = $imgPath;
-        }
-    
-        if (request()->hasFile('cover_image')) {
-            $coverImgPath = request()->file('cover_image')->store('cover-img', 'public');
-            $profileUser->cover_image = $coverImgPath;
         }
     
         $profileUser->save();
@@ -74,6 +87,35 @@ class ProfileController extends Controller
             'id' => $profileUser->id,
             'user' => $profileUser,
         ])->with('profile-img-updated', 'Profile image updated successfully');
+    }
+    public function uploadCover($id) {
+        $currentUser = Auth::user();
+        $profileUser = User::find($id);
+        if(Gate::allows('upload-img', $profileUser)) {
+            return view('profiles.cover-img', [
+                'user' => $profileUser,
+            ]);
+        } else {
+            return back()->with('unanthorized', 'Unanthorized!');
+        }
+    }
+    public function createCoverImg(Request $request, $id) { 
+        $validator = validator($request->all(), [
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2028',
+        ]);
+        $profileUser = User::findOrFail($id);
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+        if (request()->hasFile('cover_image')) {
+            $coverImgPath = request()->file('cover_image')->store('cover-img', 'public');
+            $profileUser->cover_image = $coverImgPath;
+        }
+        $profileUser->save();
+        return redirect()->route('profile', [
+            'id' => $profileUser->id,
+            'user' => $profileUser,
+        ])->with('cover-img-updated', 'Cover photo updated successfully');
     }
     
 

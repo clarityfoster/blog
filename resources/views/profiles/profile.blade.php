@@ -46,7 +46,7 @@
                         @endif
                         <div class="d-flex gap-2">
                             @can('upload-img', $user)
-                                <a href="{{ url("/users/profile/upload-profile/$user->id") }}"
+                                <a href="{{ url("/users/profile/indicate/$user->id") }}"
                                     class="text-decoration-none text-muted small">
                                     <i class="bi bi-pencil-square me-1"></i>
                                 </a>
