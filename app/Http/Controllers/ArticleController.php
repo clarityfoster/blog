@@ -71,13 +71,25 @@ class ArticleController extends Controller
             'title' => 'required',
             'body' => 'required',
             'category_id' => 'required',
+            'article_image.*' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2028',
         ]);
         if($validator->fails()) {
             return back()->withErrors($validator);
         }
+
         $article = new Article;
         $article->title = request()->title;
         $article->body = request()->body;
+        if(request()->hasFile('article_image')) {
+            $articleImgPath = [];
+            foreach(request()->file('article_image') as $image) {
+                $imagePath = $image->store('article-img', 'public');
+                $articleImgPath[] = $imagePath; 
+            }
+            $article->article_image = json_encode($articleImgPath);
+        } else {
+            $article->article_image = json_encode([]);
+        }
         $article->category_id = request()->category_id;
         $article->privacy_id = request()->privacy_id;
         $article->user_id = auth()->user()->id;

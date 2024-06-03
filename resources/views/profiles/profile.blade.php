@@ -64,6 +64,7 @@
                                 @endcan
                             @endauth
                         </p>
+                        
                         <div class="d-flex flex-column text-dark my-2">
                             <p class="mb-1">
                                 <i class="bi bi-envelope-fill text-info me-3"></i>

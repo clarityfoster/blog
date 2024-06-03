@@ -86,7 +86,7 @@ class ProfileController extends Controller
         return redirect()->route('profile', [
             'id' => $profileUser->id,
             'user' => $profileUser,
-        ])->with('profile-img-updated', 'Profile image updated successfully');
+        ])->with('profile-img-updated', 'Profile photo uploaded successfully');
     }
     public function uploadCover($id) {
         $currentUser = Auth::user();
@@ -115,7 +115,7 @@ class ProfileController extends Controller
         return redirect()->route('profile', [
             'id' => $profileUser->id,
             'user' => $profileUser,
-        ])->with('cover-img-updated', 'Cover photo updated successfully');
+        ])->with('cover-img-updated', 'Cover photo uploaded successfully');
     }
     
 

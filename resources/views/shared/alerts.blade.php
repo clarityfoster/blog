@@ -81,9 +81,13 @@
         {{ session("unfollow") }}
     </div>
 @endif
-
-@if (session("img-updated"))
+@if (session("profile-img-updated"))
+    <div class="alert alert-success">
+        {{ session("profile-img-updated") }}
+    </div>
+@endif
+@if (session("cover-img-updated"))
     <div class="alert alert-info">
-        {{ session("img-updated") }}
+        {{ session("cover-img-updated") }}
     </div>
 @endif

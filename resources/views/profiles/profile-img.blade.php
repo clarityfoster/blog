@@ -3,7 +3,7 @@
     <div class="container mt-5" style="max-width: 700px">
         @include('shared.alerts')
         <div class="mb-3">
-            <h4 class="h3 text-dark">Upload Profile Image</h4>
+            <h4 class="h3 text-success">Upload Profile Image</h4>
         </div>
         <form action="{{ url('/users/profile/upload-profile/' . $user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -13,7 +13,7 @@
             <a href="{{ url("/users/profile/indicate/$user->id") }}" class="btn btn-secondary ml-3">
                 <i class="bi bi-arrow-left"></i> Back
             </a>
-            <button class="btn btn-primary" type="submit">Upload</button>
+            <button class="btn btn-success" type="submit">Upload</button>
         </form>
         
     </div>

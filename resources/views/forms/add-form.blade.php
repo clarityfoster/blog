@@ -1,5 +1,4 @@
-
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
         <label for="title">Title</label>
@@ -8,6 +7,10 @@
     <div class="mb-3">
         <label for="body">Body</label>
         <textarea type="text" class="form-control" name="body"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="photo">Photos</label>
+        <input type="file" class="form-control" name="article_image[]" multiple>
     </div>
     <div class="mb-3">
         <label for="category">Category</label>

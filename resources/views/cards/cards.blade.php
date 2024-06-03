@@ -25,6 +25,9 @@
             @include('cards.card-header')
             @include('cards.content')
             @include('shared.react-btn')
+            @guest
+                <br>
+            @endguest
             <a href="{{ url("/articles/detail/$article->id") }}" class="text-decoration-none">
                 Detail <i class="bi bi-arrow-right"></i>
             </a>
