@@ -10,9 +10,7 @@
             <label for="cover">Cover Photo</label>
             <input type="file" name="cover_image" class="form-control mb-3">
 
-            <a href="{{ url("/users/profile/indicate/$user->id") }}" class="btn btn-secondary ml-3">
-                <i class="bi bi-arrow-left"></i> Back
-            </a>
+            @include('shared.back-btn')
             <button class="btn btn-info text-white" type="submit">Upload</button>
         </form>
         

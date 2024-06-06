@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\Article; 
@@ -14,14 +16,14 @@ class ArticleController extends Controller
         $this->middleware('auth')->except(['index', 'detail']);
     }
     public function index() {
-    $currentUser = auth()->user();
-    $category = Category::all();
+        $currentUser = auth()->user();
+        $category = Category::all();
     
         $data = Article::where(function ($query) use ($currentUser) {
-            $query->where('privacy_id', 1) // Public articles
+            $query->where('privacy_id', 1)
                 ->orWhere(function ($query) use ($currentUser) {
                     if ($currentUser) {
-                        $query->where('privacy_id', 2) // Followers only
+                        $query->where('privacy_id', 2)
                                 ->whereHas('user.followers', function ($query) use ($currentUser) {
                                     $query->where('current_user_id', $currentUser->id);
                                 });
@@ -29,18 +31,17 @@ class ArticleController extends Controller
                 })
                 ->orWhere(function ($query) use ($currentUser) {
                     if ($currentUser) {
-                        $query->where('privacy_id', 3) // Only me
+                        $query->where('privacy_id', 3)
                                 ->where('user_id', $currentUser->id);
                     }
                 });
-            })->latest()->paginate(4);
+        })->latest()->paginate(4);
 
         return view('articles.index', [
             'articles' => $data,
             'categories' => $category,
         ]);
     }
-
     public function detail($id) {
         $data = Article::find($id);
         return view('articles.detail', [
@@ -138,4 +139,44 @@ class ArticleController extends Controller
     public function backBtnToDetail() {
         return view("articles.detail");
     }
+    public function articlePhoto($id, $imageIndex) {
+        $article = Article::findOrFail($id);
+        $images = json_decode($article->article_image, true);
+        if(is_array($images) && isset($images[$imageIndex])) {
+            $image = $images[$imageIndex];
+        } else {
+            abort(404, "Image not found");
+        }
+        return view('articles.article-photo', [
+            'article' => $article,
+            'image' => $image,
+            'imageIndex' => $imageIndex
+        ]);
+    }
+    public function showArticles($id) {
+        $currentUser = auth()->user();
+        $data = Article::where(function ($query) use ($currentUser) {
+            $query->where('privacy_id', 1)
+                ->orWhere(function ($query) use ($currentUser) {
+                    if ($currentUser) {
+                        $query->where('privacy_id', 2)
+                                ->whereHas('user.followers', function ($query) use ($currentUser) {
+                                    $query->where('current_user_id', $currentUser->id);
+                                });
+                    }
+                })
+                ->orWhere(function ($query) use ($currentUser) {
+                    if ($currentUser) {
+                        $query->where('privacy_id', 3)
+                                ->where('user_id', $currentUser->id);
+                    }
+                });
+        })->latest()->paginate(4);
+        return view('profiles.profile', [
+            // 'article' => $data,
+            'user' => $currentUser,
+        ]);
+    }
+    
+    
 }

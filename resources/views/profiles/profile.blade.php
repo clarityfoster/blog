@@ -3,9 +3,9 @@
     @php
         $follow = $user->followers->where('current_user_id', auth()->user()->id)->first();
     @endphp
-    <div class="container" style="max-width: 450px">
+    <div class="container" style="max-width: 500px">
         @include('shared.alerts')
-        <div class="card mb-3" style="max-height: 650px">
+        <div class="card mb-5" style="max-height: 650px">
             <div class="card-body">
                 @php
                     $colors = [
@@ -30,17 +30,21 @@
                 @endphp
                 <div>
                     @if ($user->cover_image)
-                        <img src="{{ asset('storage/' . $user->cover_image) }}" alt="{{ $user->name }}" class="rounded"
-                            style="width: 100%; height: 200px; object-fit: cover;">
+                        <a href="{{ url("/users/profile/cover-photo/$user->id") }}">
+                            <img src="{{ asset('storage/' . $user->cover_image) }}" alt="{{ $user->name }}" class="rounded"
+                                style="width: 100%; height: 200px; object-fit: cover;">
+                        </a>
                     @else
                         <img src="{{ asset('assests/img/default.jpg') }}" alt="Cover Image" class="rounded"
                             style="width: 100%; height: 200px; object-fit: cover;">
                     @endif
                     <div class="d-flex flex-column align-items-center" style="transform: translate(0%, -20.5%)">
                         @if ($user->image)
-                            <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}"
-                                class="profile-photo rounded-circle text-white d-flex justify-content-center align-items-center object-fit-cover mb-2"
-                                style="width: 180px; height: 180px;">
+                            <a href="{{ url("/users/profile/profile-photo/$user->id") }}">
+                                <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}"
+                                    class="rounded-circle object-fit-cover mb-2"
+                                    style="width: 180px; height: 180px;">
+                            </a>
                         @else
                             @include('profiles.profile-circle')
                         @endif
@@ -64,7 +68,7 @@
                                 @endcan
                             @endauth
                         </p>
-                        
+
                         <div class="d-flex flex-column text-dark my-2">
                             <p class="mb-1">
                                 <i class="bi bi-envelope-fill text-info me-3"></i>
@@ -150,5 +154,8 @@
                 </div>
             </div>
         </div>
+        @foreach ($user->articles as $article)
+            @include('cards.card')
+        @endforeach
     </div>
 @endsection

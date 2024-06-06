@@ -8,6 +8,7 @@
                 {{ $user->name }} doesn't have any followers yet.
             </li>
         </ul>
+        @include('shared.back-btn')
         @else
             <ul class="list-group">
                 <li class="h5 list-group-item active">
@@ -29,6 +30,7 @@
                     </li>
                 @endforeach
             </ul>
+            @include('shared.back-btn')
         @endif
     </div>
 @endsection

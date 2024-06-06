@@ -19,4 +19,5 @@
             @endforeach
         </li>
     </ul>
+    @include('shared.back-btn')
 </div>

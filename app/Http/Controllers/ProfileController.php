@@ -15,9 +15,11 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
     public function profile($id) {
+        $article = Article::findOrFail($id);
         $users = User::find($id);
         return view('profiles.profile', [
             'user' => $users,
+            'article' => $article
         ]);
     }
     public function edit($id) {
@@ -117,8 +119,6 @@ class ProfileController extends Controller
             'user' => $profileUser,
         ])->with('cover-img-updated', 'Cover photo uploaded successfully');
     }
-    
-
     public function editBio($id) {
         $currentUser = Auth::user();
         $profileUser = User::find($id);
@@ -149,6 +149,22 @@ class ProfileController extends Controller
         $users = User::all();
         return view("shared.users-list", [
             "user" => $users
+        ]);
+    }
+    public function profilePhoto($id) {
+        $article = Article::find($id);
+        $user = User::find($id);
+        return view('profiles.profile-photo', [
+            'article' => $article,
+            'user' => $user,
+        ]);
+    }
+    public function coverPhoto($id) {
+        $article = Article::find($id);
+        $user = User::find($id);
+        return view('profiles.cover-photo', [
+            'article' => $article,
+            'user' => $user,
         ]);
     }
 }

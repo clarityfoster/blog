@@ -76,6 +76,11 @@
         {{ session("already-followed") }}
     </div>
 @endif
+@if (session("error"))
+    <div class="alert alert-warning">
+        {{ session("error") }}
+    </div>
+@endif
 @if (session("unfollow"))
     <div class="alert alert-danger">
         {{ session("unfollow") }}

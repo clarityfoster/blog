@@ -9,7 +9,7 @@
         <textarea type="text" class="form-control" name="body"></textarea>
     </div>
     <div class="mb-3">
-        <label for="photo">Photos</label>
+        <label for="photo">Add New Photos</label>
         <input type="file" class="form-control" name="article_image[]" multiple>
     </div>
     <div class="mb-3">
@@ -32,5 +32,6 @@
             @endforeach
         </select>
     </div>
+    @include('shared.back-btn')
     <input type="submit" value="Add Article" class="btn btn-primary">
 </form>

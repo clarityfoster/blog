@@ -67,5 +67,6 @@
                 </li>
             @endforeach
         </ul>
+        @include('shared.back-btn')
     </div>
 @endsection

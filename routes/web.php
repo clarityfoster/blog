@@ -17,6 +17,8 @@ Route::get("/articles/add", [ArticleController::class, 'add'])->middleware('auth
 Route::post("/articles/add", [ArticleController::class, 'create']);
 Route::get("/articles/edit/{id}", [ArticleController::class, 'edit']);
 Route::post("/articles/edit/{id}", [ArticleController::class, 'update']);
+Route::get("/articles/article-photo/{id}/{imageIndex}", [ArticleController::class, 'articlePhoto'])->name('articles.photo');
+Route::get("/users/profile/show-articles/{id}", [ArticleController::class, 'showArticles']);
 
 Route::get("/comments/delete/{id}", [CommentController::class, 'delete']);
 Route::post("/comments/add", [CommentController::class, 'add']);
@@ -31,12 +33,13 @@ Route::get("/users/profile/edit/{id}", [ProfileController::class, 'edit']);
 Route::post("/users/profile/edit/{id}", [ProfileController::class, 'update']);
 Route::get("/users/profile/edit-bio/{id}", [ProfileController::class, 'editBio']);
 Route::post("/users/profile/edit-bio/{id}", [ProfileController::class, 'updateBio']);
-Route::get("/users/profile/show-articles/{id}", [ProfileController::class, 'showArticles']);
 Route::get("/users/profile/indicate/{id}", [ProfileController::class, 'indicators']);
 Route::get("/users/profile/upload-profile/{id}", [ProfileController::class, 'uploadProfile']);
 Route::post("/users/profile/upload-profile/{id}", [ProfileController::class, 'createProfileImg']);
 Route::get("/users/profile/upload-cover/{id}", [ProfileController::class, 'uploadCover']);
 Route::post("/users/profile/upload-cover/{id}", [ProfileController::class, 'createCoverImg']);
+Route::get("/users/profile/profile-photo/{id}", [ProfileController::class, 'profilePhoto']);
+Route::get("/users/profile/cover-photo/{id}", [ProfileController::class, 'coverPhoto']);
 
 Route::post("/users/profile/follow/{id}", [FollowController::class, 'follow']);
 Route::post("/users/profile/unfollow/{id}", [FollowController::class, 'unfollow']);

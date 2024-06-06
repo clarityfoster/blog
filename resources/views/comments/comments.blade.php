@@ -37,7 +37,6 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-start gap-3">
                     <a href="{{ url('/users/profile/' . $comment->user->id) }}" class="text-decoration-none">
-
                         @if ($comment->user->image)
                             <img src="{{ asset('storage/' . $comment->user->image) }}" alt="{{ $comment->user->name }}"
                                 class="rounded-circle text-white d-flex justify-content-center align-items-center object-fit-cover"
@@ -76,9 +75,7 @@
         @csrf
         <input type="hidden" name="article_id" value="{{ $article->id }}">
         <textarea name="content" class="form-control mb-2" placeholder="New Comment"></textarea>
-        <a href="{{ url('/articles') }}" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> Back
-        </a>
+        @include('shared.back-btn')
         <input type="submit" value="Add Comment" class="btn btn-primary">
     </form>
 @endauth
