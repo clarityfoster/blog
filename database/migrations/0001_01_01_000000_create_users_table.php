@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
+            $table->string('profile_caption')->nullable();
+            $table->string('cover_caption')->nullable();
             $table->string('cover_image')->nullable();
             $table->string('bio')->default('');
             $table->string('email')->unique();

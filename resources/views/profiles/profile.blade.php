@@ -5,7 +5,7 @@
     @endphp
     <div class="container" style="max-width: 500px">
         @include('shared.alerts')
-        <div class="card mb-5" style="max-height: 650px">
+        <div class="card" style="max-height: 650px">
             <div class="card-body">
                 @php
                     $colors = [
@@ -42,8 +42,7 @@
                         @if ($user->image)
                             <a href="{{ url("/users/profile/profile-photo/$user->id") }}">
                                 <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}"
-                                    class="rounded-circle object-fit-cover mb-2"
-                                    style="width: 180px; height: 180px;">
+                                    class="rounded-circle object-fit-cover mb-2" style="width: 180px; height: 180px;">
                             </a>
                         @else
                             @include('profiles.profile-circle')
@@ -125,12 +124,12 @@
                                 </a>
                             </p>
                         </div>
-                        @if (auth()->user()->id !== $user->id)
-                            <div class="d-flex gap-2 mb-2">
+                        <div class="d-flex gap-2 mb-2">
+                            @if (auth()->user()->id !== $user->id)
                                 @if ($follow)
                                     <form action="{{ url("/users/profile/unfollow/$user->id") }}" method="post">
                                         @csrf
-                                        <button class="btn btn-success fs-5">
+                                        <button class="btn btn-success">
                                             <i class="bi bi-check-circle-fill me-1"></i>
                                             Following
                                         </button>
@@ -138,24 +137,39 @@
                                 @else
                                     <form action="{{ url("/users/profile/follow/$user->id") }}" method="post">
                                         @csrf
-                                        <button class="btn btn-primary fs-5">
+                                        <button class="btn btn-primary">
                                             <i class="bi bi-plus-circle-fill me-1"></i>
                                             Follow
                                         </button>
                                     </form>
                                 @endif
-                                <button class="btn btn-danger fs-5" style="max-height: 42px">
-                                    <i class="bi bi-slash-circle-fill me-1"></i>
-                                    Block
-                                </button>
-                            </div>
-                        @endif
+                            @endif
+                            <button class="btn btn-outline-primary" id="see-posts" style="max-height: 38px">
+                                See Posts
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        @foreach ($user->articles as $article)
-            @include('cards.card')
-        @endforeach
+        <div class="mt-3" id="card" style="display: none">
+            @foreach ($user->articles as $article)
+                @include('cards.card')
+            @endforeach
+        </div>
     </div>
 @endsection
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const btn = document.getElementById("see-posts")
+        const card = document.getElementById("card")
+        btn.addEventListener("click", function() {
+            if(card.style.display == "none") {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        })
+    })
+</script>

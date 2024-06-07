@@ -40,6 +40,7 @@ Route::get("/users/profile/upload-cover/{id}", [ProfileController::class, 'uploa
 Route::post("/users/profile/upload-cover/{id}", [ProfileController::class, 'createCoverImg']);
 Route::get("/users/profile/profile-photo/{id}", [ProfileController::class, 'profilePhoto']);
 Route::get("/users/profile/cover-photo/{id}", [ProfileController::class, 'coverPhoto']);
+Route::get("/users/profile/show-articles/{id}", [ProfileController::class, 'showArticles']);
 
 Route::post("/users/profile/follow/{id}", [FollowController::class, 'follow']);
 Route::post("/users/profile/unfollow/{id}", [FollowController::class, 'unfollow']);

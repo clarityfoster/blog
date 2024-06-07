@@ -167,4 +167,29 @@ class ProfileController extends Controller
             'user' => $user,
         ]);
     }
+    public function showArticles($id) {
+        $profileUser = User::find($id);
+        $currentUser = Auth::user();
+        $data = Article::where(function ($query) use ($currentUser) {
+            $query->where('privacy_id', 1)
+                ->orWhere(function ($query) use ($currentUser) {
+                    if ($currentUser) {
+                        $query->where('privacy_id', 2)
+                                ->whereHas('user.followers', function ($query) use ($currentUser) {
+                                    $query->where('current_user_id', $currentUser->id);
+                                })->orWhere('user_id', $currentUser->id);
+                    }
+                })
+                ->orWhere(function ($query) use ($currentUser) {
+                    if ($currentUser) {
+                        $query->where('privacy_id', 3)
+                                ->where('user_id', $currentUser->id);
+                    }
+                });
+        })->latest()->paginate(4);
+        return view('profiles.profile', [
+            'user' => $profileUser,
+            'article' => $data,
+        ]);
+    }
 }

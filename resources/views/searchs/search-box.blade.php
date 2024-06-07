@@ -53,4 +53,5 @@
             </ul>
             @include('cards.cards')
         @endif
+    </div>
 @endsection

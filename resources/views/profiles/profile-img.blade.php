@@ -7,12 +7,14 @@
         </div>
         <form action="{{ url('/users/profile/upload-profile/' . $user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <label for="profile_caption">Add Caption</label>
+            <input type="text" class="form-control mb-4" name="profile-caption">
+
             <label for="profile">Profile Photo</label>
             <input type="file" name="image" class="form-control mb-3">
 
             @include('shared.back-btn')
             <button class="btn btn-success" type="submit">Upload</button>
         </form>
-        
     </div>
 @endsection

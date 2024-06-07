@@ -26,7 +26,7 @@ class ArticleController extends Controller
                         $query->where('privacy_id', 2)
                                 ->whereHas('user.followers', function ($query) use ($currentUser) {
                                     $query->where('current_user_id', $currentUser->id);
-                                });
+                                })->orWhere('user_id', $currentUser->id);
                     }
                 })
                 ->orWhere(function ($query) use ($currentUser) {
@@ -43,11 +43,36 @@ class ArticleController extends Controller
         ]);
     }
     public function detail($id) {
-        $data = Article::find($id);
+        $currentUser = auth()->user();
+        $data = Article::where('id', $id)
+            ->where(function ($query) use ($currentUser) {
+                $query->where('privacy_id', 1)
+                    ->orWhere(function ($query) use ($currentUser) {
+                        if ($currentUser) {
+                            $query->where('privacy_id', 2)
+                                    ->whereHas('user.followers', function ($query) use ($currentUser) {
+                                        $query->where('current_user_id', $currentUser->id);
+                                    })->orWhere('user_id', $currentUser->id);
+                        }
+                    })
+                    ->orWhere(function ($query) use ($currentUser) {
+                        if ($currentUser) {
+                            $query->where('privacy_id', 3)
+                                    ->where('user_id', $currentUser->id);
+                        }
+                    });
+            })->first();
+    
+        if (!$data) {
+            // Article not found or the user does not have permission to view it
+            return redirect()->route('articles.index')->with('error', 'Article not found or you do not have permission to view it.');
+        }
+    
         return view('articles.detail', [
             'article' => $data,
         ]);
     }
+    
     public function delete($id) {
         $article = Article::find($id);
         if(Gate::allows('article-delete', $article )) {
@@ -153,30 +178,4 @@ class ArticleController extends Controller
             'imageIndex' => $imageIndex
         ]);
     }
-    public function showArticles($id) {
-        $currentUser = auth()->user();
-        $data = Article::where(function ($query) use ($currentUser) {
-            $query->where('privacy_id', 1)
-                ->orWhere(function ($query) use ($currentUser) {
-                    if ($currentUser) {
-                        $query->where('privacy_id', 2)
-                                ->whereHas('user.followers', function ($query) use ($currentUser) {
-                                    $query->where('current_user_id', $currentUser->id);
-                                });
-                    }
-                })
-                ->orWhere(function ($query) use ($currentUser) {
-                    if ($currentUser) {
-                        $query->where('privacy_id', 3)
-                                ->where('user_id', $currentUser->id);
-                    }
-                });
-        })->latest()->paginate(4);
-        return view('profiles.profile', [
-            // 'article' => $data,
-            'user' => $currentUser,
-        ]);
-    }
-    
-    
 }
