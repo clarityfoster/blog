@@ -8,6 +8,7 @@
             </a>
             <div class="card-body">
                 <p class="h5 card-title">{{ $user->name }}</p>
+                <p class="h6 card-title text-muted">{{ $user->profile_caption }}</p>
                 @include('shared.back-btn')
             </div>
         </div>

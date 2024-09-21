@@ -8,7 +8,8 @@
         <form action="{{ url('/users/profile/upload-profile/' . $user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="profile_caption">Add Caption</label>
-            <input type="text" class="form-control mb-4" name="profile-caption">
+            <input type="text" class="form-control mb-4" name="profile_caption" value="{{ $user->profile_caption }}">
+
 
             <label for="profile">Profile Photo</label>
             <input type="file" name="image" class="form-control mb-3">

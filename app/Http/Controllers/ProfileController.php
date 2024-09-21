@@ -70,7 +70,8 @@ class ProfileController extends Controller
     }
     public function createProfileImg(Request $request, $id) { 
         $validator = validator($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2028',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'profile_caption' => 'required|max:255',
         ]);
         
         $profileUser = User::findOrFail($id);
@@ -83,6 +84,7 @@ class ProfileController extends Controller
             $profileUser->image = $imgPath;
         }
     
+        $profileUser->profile_caption = $request->profile_caption;
         $profileUser->save();
     
         return redirect()->route('profile', [
@@ -103,7 +105,8 @@ class ProfileController extends Controller
     }
     public function createCoverImg(Request $request, $id) { 
         $validator = validator($request->all(), [
-            'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2028',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'cover_caption' => 'required|max:255',
         ]);
         $profileUser = User::findOrFail($id);
         if ($validator->fails()) {
@@ -113,6 +116,7 @@ class ProfileController extends Controller
             $coverImgPath = request()->file('cover_image')->store('cover-img', 'public');
             $profileUser->cover_image = $coverImgPath;
         }
+        $profileUser->cover_caption = $request->cover_caption;
         $profileUser->save();
         return redirect()->route('profile', [
             'id' => $profileUser->id,

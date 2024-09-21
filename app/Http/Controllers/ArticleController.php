@@ -64,7 +64,6 @@ class ArticleController extends Controller
             })->first();
     
         if (!$data) {
-            // Article not found or the user does not have permission to view it
             return redirect()->route('articles.index')->with('error', 'Article not found or you do not have permission to view it.');
         }
     
@@ -97,7 +96,7 @@ class ArticleController extends Controller
             'title' => 'required',
             'body' => 'required',
             'category_id' => 'required',
-            'article_image.*' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2028',
+            'article_image.*' => 'nullable|image|mimes:jpeg,jpg,png,gif',
         ]);
         if($validator->fails()) {
             return back()->withErrors($validator);

@@ -5,7 +5,7 @@
     @endphp
     <div class="container" style="max-width: 500px">
         @include('shared.alerts')
-        <div class="card" style="max-height: 650px">
+        <div class="card" style="max-height: 750px">
             <div class="card-body">
                 @php
                     $colors = [
@@ -42,7 +42,8 @@
                         @if ($user->image)
                             <a href="{{ url("/users/profile/profile-photo/$user->id") }}">
                                 <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}"
-                                    class="rounded-circle object-fit-cover mb-2" style="width: 180px; height: 180px;">
+                                    class="rounded-circle border border-light object-fit-cover mb-2"
+                                    style="width: 180px; height: 180px;">
                             </a>
                         @else
                             @include('profiles.profile-circle')
@@ -67,64 +68,87 @@
                                 @endcan
                             @endauth
                         </p>
-
-                        <div class="d-flex flex-column text-dark my-2">
-                            <p class="mb-1">
-                                <i class="bi bi-envelope-fill text-info me-3"></i>
-                                <b class="text-lowercase">{{ $user->email }}</b>
-                            </p>
-                            <p class="mb-1">
-                                <i class="bi bi-hearts text-danger me-3"></i>
-                                <b class="me-3">
-                                    @if ($user->relationship)
-                                        {{ $user->relationship->name }}
-                                    @else
-                                        <b class="text-muted">Hidden</b>
-                                    @endif
-                                </b>
-                                @auth
-                                    @can('edit-bio', $user)
-                                        <a href="{{ url("/users/profile/edit/$user->id") }}"
-                                            class="text-decoration-none text-muted small">
-                                            <i class="bi bi-pencil-square me-1"></i>
-                                        </a>
-                                    @endcan
-                                @endauth
-                            </p>
-                            <p class="mb-1">
-                                <i class="bi bi-clock-fill text-success me-3"></i>
-                                <b class="">
-                                    Joined at {{ $user->created_at->diffForHumans() }}
-                                </b>
-                            </p>
-                            <p class="mb-1">
-                                <i class="bi bi-rss-fill text-secondary me-3"></i>
-                                <a href="{{ url("/users/profile/followers/$user->id") }}"
-                                    class="text-decoration-none text-dark">
-                                    <b>{{ count($user->followers) }}
-                                        @if (count($user->followers) <= 1)
-                                            Follower
-                                        @else
-                                            Followers
-                                        @endif
-                                    </b>
-                                </a>
-                            </p>
-                            <p>
-                                <i class="bi bi-check-square-fill text-secondary me-3"></i>
-                                <a href="{{ url("/users/profile/following/$user->id") }}"
-                                    class="text-decoration-none text-dark">
-                                    <b>{{ count($user->following) }}
-                                        @if (count($user->following) <= 1)
-                                            Following
-                                        @else
-                                            Followings
-                                        @endif
-                                    </b>
-                                </a>
-                            </p>
+                        <div class="table-responsive w-100 mb-2">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-muted p-3">
+                                            <i class="bi bi-envelope-fill me-2"></i>Email
+                                        </td>
+                                        <td class="p-3">
+                                            <b class="text-lowercase">{{ $user->email }}</b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted p-3">
+                                            <i class="bi bi-hearts text-danger me-2"></i>Relationship
+                                        </td>
+                                        <td class="p-3">
+                                            <b class="me-3">
+                                                @if ($user->relationship)
+                                                    {{ $user->relationship->name }}
+                                                @else
+                                                    <b class="text-muted">Hidden</b>
+                                                @endif
+                                            </b>
+                                            @auth
+                                                @can('edit-bio', $user)
+                                                    <a href="{{ url("/users/profile/edit/$user->id") }}"
+                                                        class="text-decoration-none text-muted small">
+                                                        <i class="bi bi-pencil-square me-1"></i>
+                                                    </a>
+                                                @endcan
+                                            @endauth
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted p-3">
+                                            <i class="bi bi-clock-fill text-success me-2"></i> Joined at
+                                        </td>
+                                        <td class="p-3">
+                                            <b> {{ $user->created_at->diffForHumans() }}
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted p-3">
+                                            <i class="bi bi-rss-fill text-secondary me-2"></i> Followers
+                                        </td>
+                                        <td class="p-3">
+                                            <a href="{{ url("/users/profile/followers/$user->id") }}"
+                                                class="text-decoration-none text-dark">
+                                                <b>{{ count($user->followers) }}
+                                                    @if (count($user->followers) <= 1)
+                                                        Follower
+                                                    @else
+                                                        Followers
+                                                    @endif
+                                                </b>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted p-3">
+                                            <i class="bi bi-check-square-fill text-secondary me-2"></i>Following
+                                        </td>
+                                        <td class="p-3">
+                                            <a href="{{ url("/users/profile/following/$user->id") }}"
+                                                class="text-decoration-none text-dark">
+                                                <b>{{ count($user->following) }}
+                                                    @if (count($user->following) <= 1)
+                                                        Following
+                                                    @else
+                                                        Followings
+                                                    @endif
+                                                </b>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="d-flex gap-2 mb-2">
+
+                        <div class="d-flex gap-2">
                             @if (auth()->user()->id !== $user->id)
                                 @if ($follow)
                                     <form action="{{ url("/users/profile/unfollow/$user->id") }}" method="post">
@@ -165,7 +189,7 @@
         const btn = document.getElementById("see-posts")
         const card = document.getElementById("card")
         btn.addEventListener("click", function() {
-            if(card.style.display == "none") {
+            if (card.style.display == "none") {
                 card.style.display = "block";
             } else {
                 card.style.display = "none";

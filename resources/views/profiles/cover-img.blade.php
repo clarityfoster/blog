@@ -7,6 +7,8 @@
         </div>
         <form action="{{ url('/users/profile/upload-cover/' . $user->id) }}" method="POST"  enctype="multipart/form-data">
             @csrf
+            <label for="cover_caption">Cover Caption</label>
+            <input type="text" class="form-control mb-3" name="cover_caption" value="{{ $user->cover_caption }}">
             <label for="cover">Cover Photo</label>
             <input type="file" name="cover_image" class="form-control mb-3">
 
