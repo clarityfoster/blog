@@ -96,3 +96,18 @@
         {{ session("cover-img-updated") }}
     </div>
 @endif
+@if (session("share-article"))
+    <div class="alert alert-info">
+        {{ session("share-article") }}
+    </div>
+@endif
+@if (session("cm-reply"))
+    <div class="alert alert-info">
+        {{ session("cm-reply") }}
+    </div>
+@endif
+@if (session("reply-del"))
+    <div class="alert alert-danger">
+        {{ session("reply-del") }}
+    </div>
+@endif

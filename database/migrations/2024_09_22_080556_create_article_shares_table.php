@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('article_shares', function (Blueprint $table) {
             $table->id();
-            $table->text('content');
             $table->integer('article_id');
             $table->integer('user_id');
-            $table->integer('parent_id')->nullable();
+            $table->string('share_caption')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('article_shares');
     }
 };

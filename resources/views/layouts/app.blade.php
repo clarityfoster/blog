@@ -63,7 +63,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         @auth
-                            <form method="GET" class="input-group me-2" action="{{ url('/users/search') }}">
+                            <form method="GET" class="input-group me-3" action="{{ url('/users/search') }}">
                                 <input type="text" class="form-control" placeholder="Search"
                                     aria-label="Example text with button addon" aria-describedby="button-addon1"
                                     name="query">

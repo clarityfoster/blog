@@ -8,6 +8,7 @@ use App\Http\Controllers\DislikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ArticleShareController;
 
 Route::get('/', [ArticleController::class, 'index']);
 Route::get('/articles', [ArticleController::class, 'index']);
@@ -23,6 +24,9 @@ Route::get("/users/profile/show-articles/{id}", [ArticleController::class, 'show
 Route::get("/comments/delete/{id}", [CommentController::class, 'delete']);
 Route::post("/comments/add", [CommentController::class, 'add']);
 Route::get("/comments/view/{id}", [CommentController::class, 'view']);
+
+Route::post("/comments/reply", [CommentController::class, 'reply']);
+Route::get("/comments/reply/delete/{id}", [CommentController::class, 'replyDelete']);
 
 Route::post("/reacts/like", [ReactController::class, 'like']);
 Route::post("/reacts/unlike/{id}", [ReactController::class, 'unlike']);
@@ -50,6 +54,8 @@ Route::get("/users/profile/following/{id}", [FollowController::class, 'following
 Route::get("/users/search", [SearchController::class, 'search']);
 
 Route::get("/users/users-list", [ProfileController::class, 'usersList']);
+
+Route::post('/articles/share', [ArticleShareController::class, 'share']);
 
 Auth::routes();
 

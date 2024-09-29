@@ -4,5 +4,6 @@
         @include('shared.alerts')
         @include('cards.card')
         @include('comments.comments')
+        @include('shared.shared-box')
     </div>
 @endsection

@@ -6,11 +6,11 @@
 @endphp
 
 <p class="card-text">
-    <span class="card-text" id="previewText">{!! nl2br(e($previewText)) !!}</span>
+    <span class="previewText card-text">{!! nl2br(e($previewText)) !!}</span>
     @if ($longText)
-        <span class="card-text" id="fullBody" style="display: none">{!! nl2br(e($article->body)) !!}</span>
-        <a href="#" id="seeMore" class="text-muted text-decoration-none">See more</a>
-        <a href="#" id="seeLess" class="text-muted text-decoration-none" style="display: none">See less</a>
+        <span class="fullBody card-text" style="display: none">{!! nl2br(e($article->body)) !!}</span>
+        <a href="#" class="seeMore text-muted text-decoration-none">See more</a>
+        <a href="#" class="seeLess text-muted text-decoration-none" style="display: none">See less</a>
     @endif
 </p>
 @php
@@ -27,25 +27,32 @@
         @endforeach
     </div>
 @endif
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const seeMore = document.getElementById('seeMore');
-        const seeLess = document.getElementById('seeLess');
-        const previewText = document.getElementById('previewText');
-        const fullBody = document.getElementById('fullBody');
-        seeMore.addEventListener("click", function() {
-            seeMore.style.display = "none";
-            seeLess.style.display = "inline";
-            previewText.style.display = "none";
-            fullBody.style.display = "inline";
-        })
-        seeLess.addEventListener("click", function() {
-            seeMore.style.display = "inline";
-            seeLess.style.display = "none";
-            previewText.style.display = "inline";
-            fullBody.style.display = "none";
-        })
-        
-    })
+        const seeMoreButtons = document.querySelectorAll('.seeMore');
+        const seeLessButtons = document.querySelectorAll('.seeLess');
+        const previewTexts = document.querySelectorAll('.previewText');
+        const fullBodies = document.querySelectorAll('.fullBody');
+
+        seeMoreButtons.forEach((button, index) => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                button.style.display = "none";
+                seeLessButtons[index].style.display = "inline";
+                previewTexts[index].style.display = "none";
+                fullBodies[index].style.display = "inline";
+            });
+        });
+
+        seeLessButtons.forEach((button, index) => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                button.style.display = "none";
+                seeMoreButtons[index].style.display = "inline";
+                fullBodies[index].style.display = "none";
+                previewTexts[index].style.display = "inline";
+            });
+        });
+    });
 </script>
+
