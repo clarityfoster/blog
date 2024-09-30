@@ -16,7 +16,6 @@ return new class extends Migration
             $table->text('content');
             $table->integer('article_id');
             $table->integer('user_id');
-            $table->integer('parent_id')->nullable();
             $table->timestamps();
         });
     }

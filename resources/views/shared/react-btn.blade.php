@@ -49,18 +49,5 @@
                 @endif
             </a>
         </div>
-        @php
-            $user = $article->user;
-        @endphp
-        @if (auth()->user()->id !== $user->id)
-            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                data-bs-whatever="@mdo">
-                <i class="bi bi-share-fill text-secondary fs-5"></i>
-            </button>
-        @else
-            <a href="#" class="btn text-decoration-none">
-                <i class="bi bi-link-45deg text-secondary fs-4"></i>
-            </a>
-        @endif
     </div>
 @endauth

@@ -58,21 +58,8 @@
                                 {{ $comment->created_at->diffForHumans() }}
                             </small>
                         </div>
-                        @php
-                            $previewLength = 145;
-                            $longText = strlen($comment->content) > $previewLength;
-                            $previewText = $longText
-                                ? substr($comment->content, 0, $previewLength) . '...'
-                                : $comment->content;
-                        @endphp
-                        <span class="previewText">{!! nl2br(e($previewText)) !!}</span>
-                        @if ($longText)
-                            <span class="fullBody" style="display: none">{!! nl2br(e($comment->content)) !!}</span>
-                            <a href="#" class="seeMore small text-muted text-decoration-none">See more</a>
-                            <a href="#" class="seeLess small text-muted text-decoration-none"
-                                style="display: none">See less</a>
-                        @endif
-                        <a href="" class="reply card-link text-decoration-none small text-muted"
+                        <span>{{$comment->content}}</span>
+                        <a href="#" class="reply card-link text-decoration-none small text-muted"
                             data-user="{{ $comment->user->name }}">
                             Reply
                         </a>
@@ -191,31 +178,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const seeMoreButtons = document.querySelectorAll('.seeMore');
-        const seeLessButtons = document.querySelectorAll('.seeLess');
-        const previewTexts = document.querySelectorAll('.previewText');
-        const fullBodies = document.querySelectorAll('.fullBody');
-
-        seeMoreButtons.forEach((button, index) => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault();
-                button.style.display = "none";
-                seeLessButtons[index].style.display = "inline";
-                previewTexts[index].style.display = "none";
-                fullBodies[index].style.display = "inline";
-            });
-        });
-
-        seeLessButtons.forEach((button, index) => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault();
-                button.style.display = "none";
-                seeMoreButtons[index].style.display = "inline";
-                fullBodies[index].style.display = "none";
-                previewTexts[index].style.display = "inline";
-            });
-        });
-
         const replyBtn = document.querySelectorAll('.reply');
         const cancelBtn = document.querySelectorAll('.cancelBtn');
         const row = document.querySelectorAll(".row");
