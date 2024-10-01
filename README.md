@@ -5,16 +5,19 @@ A simple blog application built with Laravel, showcasing the use of the framewor
 
 ## Features
 - **User Authentication**: 
-  - Secure registration and login system for users.
+  - Registration and login system for users.
   - Password reset functionality.
 
-- **Post Creation**: 
+- **Post Creation With Privacy**: 
   - Users can create, edit, and delete their own blog posts.
-  - Supports Markdown formatting for rich text.
+  - Aritcles can be posted with privacy like public, friends only and only me.
 
-- **Comment System**: 
+- **Like And Comment System**: 
   - Users can leave comments on posts.
-  - Comments can be edited or deleted by the user.
+  - Comments can be deleted by the user and replied the other users.
+
+- **Follow System**:
+  - Users can follow each other.
 
 ## Technologies Used
 - Laravel
@@ -22,11 +25,3 @@ A simple blog application built with Laravel, showcasing the use of the framewor
 - MySQL
 - HTML/CSS
 - Bootstrap
-
-## Installation
-To set up the project locally, follow these steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/laravel-blog.git
-   cd laravel-blog
