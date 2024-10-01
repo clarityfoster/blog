@@ -1,6 +1,4 @@
 # Blog
-
-## Overview
 A simple blog application built with Laravel, showcasing the use of the framework to create a basic blogging platform. This project includes essential features like user authentication, post creation, and commenting functionality.
 
 ## Features
