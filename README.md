@@ -23,6 +23,6 @@ A simple blog application built with Laravel, showcasing the use of the framewor
 
 ## Technologies Used
 - Laravel
-- MySQL
+- MySQL(managed using phpMyAdmin)
 - HTML/CSS
 - Bootstrap
