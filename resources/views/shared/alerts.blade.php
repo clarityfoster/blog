@@ -111,3 +111,23 @@
         {{ session("reply-del") }}
     </div>
 @endif
+@if (session("changeRole"))
+    <div class="alert alert-info">
+        {{ session("changeRole") }}
+    </div>
+@endif
+@if (session("ban"))
+    <div class="alert alert-warning">
+        {{ session("ban") }}
+    </div>
+@endif
+@if (session("unban"))
+    <div class="alert alert-success">
+        {{ session("unban") }}
+    </div>
+@endif
+@if (session("suspended"))
+    <div class="alert alert-warning">
+        {{ session("suspended") }}
+    </div>
+@endif

@@ -18,6 +18,10 @@ class ReactController extends Controller
         $userId = auth()->user()->id;
         $articleId = request()->article_id;
         $like = React::where('article_id', $articleId)->where('user_id', $userId)->first();
+
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if ($like) {
             return back();
         }
@@ -30,6 +34,9 @@ class ReactController extends Controller
     public function unlike($id) {
         $userId = auth()->user()->id;
         $like = React::where('id', $id)->where('user_id', $userId)->first();
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if (!$like) {
             return back();
         }

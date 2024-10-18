@@ -20,6 +20,10 @@ class FollowController extends Controller
         $follow = Follow::where('user_id', $profileUser->id)
                             ->where('current_user_id', $currentUserId)
                             ->first();
+
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if($follow) {
             return back()->with("already-followed", "Already followed this user!");
         }
@@ -35,6 +39,10 @@ class FollowController extends Controller
         $follow = Follow::where('user_id', $profileUser->id)
                             ->where('current_user_id', $currentUserId)
                             ->first();
+
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if(!$follow) {
             return back();
         }

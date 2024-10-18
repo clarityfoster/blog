@@ -16,6 +16,9 @@ class CommentController extends Controller
     }
     public function delete($id) {
         $comment = Comment::find($id);
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if(Gate::allows("comment-delete", $comment)) {
             $comment->delete();
             return back()->with('cm-delete', "Comment deleted");
@@ -28,6 +31,9 @@ class CommentController extends Controller
             'content' => 'required',
             'article_id' => 'required',
         ]);
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if($validator->fails()) {
             return back()->withErrors($validator);
         }
@@ -44,6 +50,9 @@ class CommentController extends Controller
             'comment_id' => 'required',
             'article_id' => 'required',
         ]);
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if($validator->fails()) {
             return back()->withErrors($validator);
         }
@@ -57,6 +66,9 @@ class CommentController extends Controller
     }
     public function replyDelete($id) {
         $reply = Reply::find($id);
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if(Gate::allows("reply-del", $reply)) {
             $reply->delete();
             return back()->with("reply-del", "Reply deleted");

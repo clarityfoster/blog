@@ -26,7 +26,9 @@ class ProfileController extends Controller
         $currentUser = Auth::user();
         $profileUser = User::find($id);
         $relationships = Relationship::all();
-
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if(Gate::allows("edit-rs", $profileUser)) {
             return view('profiles.rs-edit', [
                 "user" => $profileUser,
@@ -49,6 +51,9 @@ class ProfileController extends Controller
     public function indicators($id) {
         $currentUser = Auth::user();
         $profileUser = User::find($id);
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if(Gate::allows('upload-img', $profileUser)) {
             return view('profiles.indicate', [
                 'user' => $profileUser,
@@ -126,6 +131,9 @@ class ProfileController extends Controller
     public function editBio($id) {
         $currentUser = Auth::user();
         $profileUser = User::find($id);
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if(Gate::allows("edit-bio", $profileUser)) {
             return view('profiles.edit-bio', [
                 'user' => $profileUser,
@@ -195,5 +203,29 @@ class ProfileController extends Controller
             'user' => $profileUser,
             'article' => $data,
         ]);
+    }
+    public function dashborad() {
+        $users = User::all();
+        return view('profiles.dashboard', [
+            'users' => $users,
+        ]);
+    }
+    public function changeRole($id) {
+        $user = User::findOrFail($id);
+        $user->role_id = request()->input('role_id');
+        $user->save();
+        return redirect()->back()->with('changeRole', 'Role has been changed successfully');
+    }
+    public function ban($id) {
+        $user = User::findOrFail($id);
+        $user->ban = true;
+        $user->save();
+        return redirect()->back()->with('ban', 'User has been banned');
+    }
+    public function unban($id) {
+        $user = User::findOrFail($id);
+        $user->ban = false;
+        $user->save();
+        return redirect()->back()->with('unban', 'User has been unbanned');
     }
 }

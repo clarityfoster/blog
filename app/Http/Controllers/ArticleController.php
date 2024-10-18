@@ -74,6 +74,9 @@ class ArticleController extends Controller
     
     public function delete($id) {
         $article = Article::find($id);
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if(Gate::allows('article-delete', $article )) {
             $article->delete();
             return redirect('/articles')->with('article-delete', 'Article deleted');
@@ -85,6 +88,9 @@ class ArticleController extends Controller
         $categories = Category::all();
         $articles = Article::all();
         $privacies = Privacy::all();
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         return view('articles.add', [
             'category' => $categories,
             'article' => $articles,
@@ -101,7 +107,6 @@ class ArticleController extends Controller
         if($validator->fails()) {
             return back()->withErrors($validator);
         }
-
         $article = new Article;
         $article->title = request()->title;
         $article->body = request()->body;
@@ -126,6 +131,9 @@ class ArticleController extends Controller
         $articles = Article::find($id);
         $category = Category::all();
         $privacy = Privacy::all();
+        if(auth()->user()->ban) {
+            return back()->with("suspended", "Your account has been suspended");
+        }
         if(Gate::allows('article-edit', $articles)) {
             return view('articles.edit', [
                 'article' => $articles,

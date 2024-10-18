@@ -46,6 +46,10 @@ class User extends Authenticatable
     public function following() {
         return $this->hasMany(Follow::class, 'current_user_id'); //current log in user id
     }
+
+    public function role() {
+        return $this->belongsTo('App\Models\Role');
+    }
     /**
      * Get the attributes that should be cast.
      *

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at');
             $table->integer('relationship_id')->default(0);
             $table->integer('follow_id')->default(0);
+            $table->integer('role_id')->default(3);
+            $table->boolean('ban')->default(false);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

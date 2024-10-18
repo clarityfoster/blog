@@ -22,6 +22,18 @@ class DatabaseSeeder extends Seeder
             "email" => "alice@gmail.com",
         ]);
         \App\Models\User::factory()->create([
+            "name" => "Elle",
+            "email" => "elle@gmail.com",
+        ]);
+        \App\Models\User::factory()->create([
+            "name" => "Sonia",
+            "email" => "sonia@gmail.com",
+        ]);
+        \App\Models\User::factory()->create([
+            "name" => "Oliver",
+            "email" => "oliver@gmail.com",
+        ]);
+        \App\Models\User::factory()->create([
             "name" => "Bob",
             "email" => "bob@gmail.com",
         ]);
@@ -40,6 +52,10 @@ class DatabaseSeeder extends Seeder
         ];
         foreach($privary as $name => $icons) {
             \App\Models\Privacy::factory()->create(['name' => $name, 'icons' => $icons]);
+        }
+        $list = ['Admin', 'Manager', 'User'];
+        foreach($list as $name) {
+            \App\Models\Role::factory()->create(['name' => $name]);
         }
     }
 }

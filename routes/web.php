@@ -54,6 +54,10 @@ Route::get("/users/profile/following/{id}", [FollowController::class, 'following
 Route::get("/users/search", [SearchController::class, 'search']);
 
 Route::get("/users/users-list", [ProfileController::class, 'usersList']);
+Route::get("/dashboard", [ProfileController::class, 'dashborad'])->name('dashboard');
+Route::put("/dashboard/changeRole/{id}", [ProfileController::class, 'changeRole'])->name('changeRole');
+Route::post("/dashboard/ban/{id}", [ProfileController::class, 'ban'])->name('ban');
+Route::post("/dashboard/unban/{id}", [ProfileController::class, 'unban'])->name('unban');
 
 Route::post('/articles/share', [ArticleShareController::class, 'share']);
 
