@@ -17,6 +17,10 @@ A simple blog application built with Laravel, showcasing the use of the framewor
 - **Follow System**:
   - Users can follow each other.
 
+_ **Admin Dashboard**:
+  - Admins can change the roles like managers and users.
+  - Users can be banned by admins and managers.
+
 ## Technologies Used
 - Laravel
 - MySQL
