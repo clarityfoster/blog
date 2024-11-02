@@ -2,21 +2,21 @@
 @section('content')
     <div class="container">
         @include('shared.alerts')
-        <table class="table table-bordered border-dark">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">User Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
-                    @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                    @if (auth()->check() && (auth()->user()->role_id == 1 || auth()->user()->role_id == 2))
                         <th scope="col">Change Role</th>
                     @endif
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                    <tr>
+                    <tr class="{{ auth()->check() && auth()->user()->id == $user->id ? 'table-active' : '' }}">
                         <td scope="col">{{ $user->id }}</td>
                         <td scope="col">{{ $user->name }}</td>
                         <td scope="col">{{ $user->email }}</td>
@@ -39,7 +39,7 @@
                         @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
                             <td scope="col">
                                 <div class="d-flex gap-2">
-                                    @if (auth()->user()->role_id == 1)
+                                    @if ((auth()->user()->role_id == 1 && $user->role_id != 1))
                                         <div class="dropdown">
                                             <button class="btn btn-outline-secondary dropdown-toggle" type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,7 +63,8 @@
                                             </ul>
                                         </div>
                                     @endif
-                                    @if (auth()->user()->id !== $user->id && $user->role_id !== 1)
+                                    @if ((auth()->user()->role_id == 1 && $user->role_id != 1) || 
+                                        (auth()->user()->role_id == 2 && $user->role_id == 3))
                                         <form action="{{ $user->ban == 0 ? route('ban', ['id' => $user->id]) : route('unban', ['id' => $user->id]) }}" method="post">
                                             @csrf
                                             <button name="ban" type="submit" class="btn {{ $user->ban == 0 ? 'btn-outline-warning' : 'btn-warning' }}">
