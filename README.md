@@ -4,7 +4,6 @@ A simple blog application built with Laravel, showcasing the use of the framewor
 ## Features
 - **User Authentication**: 
   - Registration and login system for users.
-  - Password reset functionality.
 
 - **Post Creation With Privacy**: 
   - Users can create, edit, and delete their own blog posts.
